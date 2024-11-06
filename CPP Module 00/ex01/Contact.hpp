@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:12:34 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/05 15:28:36 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:52:42 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+# ifndef CONTACT_HPP
+# define CONTACT_HPP
+
+# include <iostream>
+# include <string>
 
 class	Contact
 {
@@ -28,4 +32,8 @@ class	Contact
 
 		//set atrribut
 		void	setAttrinut();
+
+        void    display();
 };
+
+#endif

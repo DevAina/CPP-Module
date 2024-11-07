@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:28:43 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/07 14:48:10 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:14:00 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,11 @@ PhoneBook::~PhoneBook() {}
 
 void	PhoneBook::add(void)
 {
-    if (currentIndex == 8)
-    {
-		count = 0;
-        currentIndex = 0;
-        contacts[currentIndex].setAttrinut();
-    }
-    else
-	{
-        contacts[currentIndex].setAttrinut();
-	}
-	count++;
+	if (currentIndex == 8)
+		currentIndex = 0;
+    contacts[currentIndex].setAttrinut();
+	if (count >= 0 && count <= 8)
+		count++;
 	currentIndex++;
 }
 

@@ -13,7 +13,7 @@ YELLOW = \033[33m
 CYAN = \033[36m
 RESET = \033[0m
 
-.c.o :
+%.o : %.cpp
 	echo "${YELLOW}Compiling $< ... ${RESET}"
 	@c++ -c ${FLAGS} -o ${<:.cpp=.o}
 

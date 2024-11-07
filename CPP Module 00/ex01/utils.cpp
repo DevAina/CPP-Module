@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   repertory.hpp                                      :+:      :+:    :+:   */
+/*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 07:35:13 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/07 14:23:43 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/07 14:21:50 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/07 14:23:47 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REPERTORY_HPP
-# define REPERTORY_HPP
+#include "repertory.hpp"
 
-# include <iostream>
-# include <iomanip>
-# include <string>
-# include "Contact.hpp"
-# include "PhoneBook.hpp"
-
-std::string truncate(std::string str);
-bool		isDigit(std::string &input);
-std::string	getInput(std::string &attribut, int is_digit);
-
-#endif
+std::string	truncate(std::string str)
+{
+	if (str.length() > 10)
+		return (str.substr(0, 9) + ".");
+	return (str);
+}

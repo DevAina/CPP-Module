@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:12:38 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/06 14:31:06 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:33:49 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ class PhoneBook
 {
 	private:
 		Contact contacts[8];
+		int		count;
 		int		currentIndex;
 
 	public:
@@ -27,8 +28,6 @@ class PhoneBook
 		~PhoneBook();
 		void	add();
 		void	search();
-
-		void	display_all();
 };
 
 #endif

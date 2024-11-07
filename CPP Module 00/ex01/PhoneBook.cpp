@@ -6,31 +6,55 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:28:43 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/06 15:28:37 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:48:10 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "repertory.hpp"
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() : currentIndex(0) {}
+PhoneBook::PhoneBook() : count(0), currentIndex(0) {}
 
 PhoneBook::~PhoneBook() {}
 
-void	PhoneBook::add()
+void	PhoneBook::add(void)
 {
     if (currentIndex == 8)
     {
+		count = 0;
         currentIndex = 0;
         contacts[currentIndex].setAttrinut();
     }
     else
+	{
         contacts[currentIndex].setAttrinut();
-    currentIndex++;
+	}
+	count++;
+	currentIndex++;
 }
 
-void	PhoneBook::display_all()
+void	PhoneBook::search(void)
 {
-	for (int i = 0; i < 8; i++)
+	int			index;
+	std::string	attribut = "Index";
+	std::string	input;
+
+	if (count == 0)
+	{
+		std::cerr << "\033[31m No contact. Please enter Contact \033[0m \n";
+		return ;
+	}
+	std::cout << std::setw(10) << "Index" << "|" << std::setw(10) << "First Name" << "|" << std::setw(10) << "Last Name" << "|" << std::setw(10) << "nickname" << std::endl;
+	for (int i = 0 ; i < count ; i++)
+	{
+		std::cout << std::setw(10) << i << "|";
 		contacts[i].display();
+	}
+
+	input = getInput(attribut, 1);
+	index = std::stoi(input);
+	if (index >= 0 && index < count)
+		contacts[index].display_all_infos();
+	else
+		std::cerr << "\033[31m  Index out of range or Index invalid \033[0m\n";
 }

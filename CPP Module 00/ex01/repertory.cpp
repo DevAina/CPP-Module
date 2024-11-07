@@ -6,14 +6,13 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:29:18 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/06 20:08:33 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:35:39 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "repertory.hpp"
 
 bool	isDigit(std::string &input)
-
 {
     if (input.empty())
         return (false);
@@ -21,7 +20,7 @@ bool	isDigit(std::string &input)
     {
         if (!std::isdigit(c))
         {
-            std::cout << "Invalid input. Input must be an integer" << std::endl;
+            std::cerr << "\033[31m Invalid input. Input must be an integer \033[0m" << std::endl;
             return (false);
         }
     }
@@ -37,10 +36,10 @@ std::string	getInput(std::string &attribut, int is_digit)
         std::cout << attribut << ": ";
         if (!std::getline(std::cin, input))
         {
-            std::cin.clear();
-            std::cin.ignore();
-            std::cout << "Invalid input. Please try again" << std::endl;
-            continue;
+			std::cin.clear();
+			std::cin.ignore();
+			std::cerr << "\033[31m ERROR \033[0m" << std::endl;
+			exit(0);
         }
         if (is_digit == 1)
         {
@@ -52,7 +51,7 @@ std::string	getInput(std::string &attribut, int is_digit)
             if (!input.empty())
                 break ;
             else
-                std::cout << "This field must not be empty" << std::endl;
+                std::cerr << "\033[31m This field must not be empty \033[0m" << std::endl;
         }
     }
     return (input);

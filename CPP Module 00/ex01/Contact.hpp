@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:12:34 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/06 14:52:42 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:28:18 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class	Contact
     private:
 		std::string	firstName;
         std::string	lastName;
+        std::string	nickName;
         std::string	phoneNumber;
         std::string	darkestSecret;
 
@@ -32,7 +33,7 @@ class	Contact
 
 		//set atrribut
 		void	setAttrinut();
-
+        void    display_all_infos();
         void    display();
 };
 

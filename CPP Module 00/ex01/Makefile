@@ -4,7 +4,7 @@ CC = c++
 
 FLAGS = -Wall -Wextra -Werror
 
-SRCS = Contact.cpp PhoneBook.cpp repertory.cpp main.cpp
+SRCS = Contact.cpp PhoneBook.cpp repertory.cpp main.cpp utils.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 

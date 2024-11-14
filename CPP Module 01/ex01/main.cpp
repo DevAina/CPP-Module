@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 12:10:30 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/13 13:16:48 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/14 09:08:22 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/14 13:21:02 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 #include <iostream>
-# include <string>
+#include <string>
 
 Zombie* zombieHorde( int N, std::string name );
 

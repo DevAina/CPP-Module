@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 10:37:24 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/13 10:47:24 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/14 09:07:44 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/14 13:20:42 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

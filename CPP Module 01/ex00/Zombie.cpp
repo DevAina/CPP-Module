@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 10:20:53 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/13 11:41:25 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/14 09:07:50 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/14 13:20:46 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

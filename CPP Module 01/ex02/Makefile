@@ -14,12 +14,12 @@ CYAN = \033[36m
 RESET = \033[0m
 
 %.o : %.cpp
-	echo "${YELLOW}Compiling $< ... ${RESET}"
+	@echo "${YELLOW}Compiling $< ... ${RESET}"
 	@c++ -c ${FLAGS} $< -o $@
 
 ${NAME} : ${OBJ}
 	@c++ -o ${NAME} ${OBJ} ${FLAGS}
-	echo "${CYAN}${NAME} has been succefully built! ${RESET}"
+	@echo "${CYAN}${NAME} has been succefully built! ${RESET}"
 
 clean :
 	rm -rf ${OBJ}

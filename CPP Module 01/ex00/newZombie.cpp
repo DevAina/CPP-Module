@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   newZombie.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 10:31:44 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/13 11:08:21 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/14 09:07:37 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/14 13:20:38 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

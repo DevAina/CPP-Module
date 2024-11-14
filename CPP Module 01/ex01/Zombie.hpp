@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 11:56:02 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/13 13:06:59 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/14 09:08:34 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/14 13:21:18 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class  Zombie
         Zombie();
         ~ Zombie();
 
-		void	announce(void);
 		void	setName(std::string name);
 };
 

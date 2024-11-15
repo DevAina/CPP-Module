@@ -6,37 +6,11 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:38:14 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/14 14:45:35 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/15 06:48:57 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <fstream>
-#include <string>
-
-std::string	replace(std::string line, std::string old_word, std::string new_word)
-{
-	size_t			pos = 0;
-	std::string	result;
-
-	while (pos < line.length())
-	{
-		size_t	index_old_word = line.find(old_word, pos);
-
-		if (index_old_word != std::string::npos)
-		{
-			result.append(line, pos, index_old_word - pos);
-			result.append(new_word);
-			pos = index_old_word + old_word.length();
-		}
-		else
-		{
-			result.append(line.substr(pos));
-			break;
-		}
-	}
-	return (result);
-}
+# include "SedBeGone.hpp"
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:17:37 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/15 18:58:14 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:33:54 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ void	Harl::error(void)
 
 void	Harl::complain(std::string level)
 {
+	void (Harl::*complains[4])(void) = {
+		&Harl::debug,
+		&Harl::info,
+		&Harl::warning,
+		&Harl::error
+	};
 	int	index_level = -1;
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
@@ -46,6 +52,13 @@ void	Harl::complain(std::string level)
 		if (levels[i].compare(level) == 0)
 		{
 			index_level = i;
+			while (index_level < 4)
+			{
+				std::cout << "\033[1;33m[" << levels[index_level] << "]\033[0m" << std::endl;
+				(this->*complains[index_level])();
+				std::cout << "\n";
+				index_level++;
+			}
 			break;
 		}
 	}
@@ -53,31 +66,5 @@ void	Harl::complain(std::string level)
 	{
 		std::cerr << "\033[31mNO APPROPRIATE LEVEL\033[0m" << std::endl;
 		return ;
-	}
-	switch (index_level)
-	{
-		case 0:
-			std::cout << "\033[1;32mDEBUG\033[0m" << std::endl;
-			debug();
-			std::cout << "\n";
-			[[fallthrough]];
-		case 1:
-			std::cout << "\033[1;32mINFO\033[0m" << std::endl;
-			info();
-			std::cout << "\n";
-			[[fallthrough]];
-		case 2:
-			std::cout << "\033[1;32mWARNING\033[0m" << std::endl;
-			warning();
-			std::cout << "\n";
-			[[fallthrough]];
-		case 3:
-			std::cout << "\033[1;32mERROR\033[0m" << std::endl;
-			error();
-			std::cout << "\n";
-			break;
-		default:
-			std::cerr << "NO APPROPRIATE LEVEL" << std::endl;
-			break;
-	}
+	}	
 }

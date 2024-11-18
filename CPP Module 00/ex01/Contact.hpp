@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 15:12:34 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/07 14:28:18 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/12 09:32:47 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/18 12:05:14 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef CONTACT_HPP
+#ifndef CONTACT_HPP
 # define CONTACT_HPP
 
 # include <iostream>
@@ -18,23 +18,20 @@
 
 class	Contact
 {
-    private:
+	private:
 		std::string	firstName;
-        std::string	lastName;
-        std::string	nickName;
-        std::string	phoneNumber;
-        std::string	darkestSecret;
+		std::string	lastName;
+		std::string	nickName;
+		std::string	PhoneNumber;
+		std::string	darkestSecret;
 
-    public:
-		//constructor
-        Contact();
-		//destructor
-        ~Contact();
+	public:
+		Contact();
+		~Contact();
 
-		//set atrribut
-		void	setAttrinut();
-        void    display_all_infos();
-        void    display();
+		void	fillAttribut(void);
+		void	display_all_infos(void);
+		void	display(void);
 };
 
 #endif

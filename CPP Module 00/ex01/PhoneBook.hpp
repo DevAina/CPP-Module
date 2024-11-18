@@ -5,24 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 15:12:38 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/07 15:12:57 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/12 13:35:26 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/18 12:07:20 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# include <iostream>
 # include "Contact.hpp"
+# include <iostream>
+# include <string>
 
 class PhoneBook
 {
 	private:
-		Contact contacts[8];
+		Contact	contact[8];
 		int		count;
 		int		currentIndex;
-
+	
 	public:
 		PhoneBook();
 		~PhoneBook();

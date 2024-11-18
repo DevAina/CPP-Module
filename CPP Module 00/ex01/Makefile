@@ -11,16 +11,20 @@ OBJS = ${SRCS:.cpp=.o}
 all : ${NAME}
 
 %.o : %.cpp
-	${CC} -c ${FLAGS} $< -o $@
+	@echo "\033[33mCompiling $< ...\033[0m"
+	@${CC} -c ${FLAGS} $< -o $@
 
 ${NAME}: ${OBJS}
-	c++ ${FLAGS} ${OBJS} -o ${NAME}
+	@c++ ${FLAGS} ${OBJS} -o ${NAME}
+	@echo "\033[36m${NAME} has been succesfully built!\033[0m"
 
 clean:
-	rm -rf ${OBJS}
+	@echo "\033[31mCleaning object files...\033[0m"
+	@rm -rf ${OBJS}
 
 fclean : clean
-	rm -rf ${NAME}
+	@echo "\033[31mPerforming full clean...\033[0m"
+	@rm -rf ${NAME}
 
 re : fclean all
 

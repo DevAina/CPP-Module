@@ -5,36 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 10:11:22 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/20 10:30:27 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/20 10:43:45 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/20 11:18:03 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #include <ostream>
 
-Fixed::Fixed(void): value(0)
+Fixed::Fixed( void ): value(0)
 {
 	std::cout << "Default constructor called" << std::endl;
-}
-
-Fixed::Fixed( int const  nb )
-{
-	std::cout << "Int constructor called" << std::endl;
-	value = nb * pow(2, rawBits);
-}
-
-Fixed::Fixed( float const nb_float )
-{
-	std::cout << "Float constructor called" << std::endl;
-	value = static_cast<int>(roundf(nb_float * pow(2, rawBits)));
-}
-
-Fixed::~Fixed()
-{
-	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &other): value(other.value)
@@ -42,44 +25,53 @@ Fixed::Fixed(const Fixed &other): value(other.value)
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed&	Fixed::operator=(const Fixed& other)
+Fixed::Fixed(const int nb)
 {
-	if (this != &other)
-	{
-		std::cout << "Copy assignement operator called" << std::endl;
-		value = other.value;
-	}
-	return (*this);
+	std::cout << "Int constructor called" << std::endl;
+	value = nb * pow(2, rawBits);
 }
 
-std::ostream&	operator<<(std::ostream &os, const Fixed & other)
+Fixed::Fixed(const float nb)
 {
-	os << other.toFloat();
-	return (os);
+	std::cout << "Float constructor called" << std::endl;
+	value = static_cast<int>(roundf(nb * pow(2, rawBits)));
 }
 
+Fixed::~Fixed() {
+	std::cout << "Destructor called" << std::endl;
+}
 
-int	Fixed::getRawBits( void )
+int	Fixed::getRawBits( void ) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
-	return (value);
+	return (rawBits);
 }
 
-void	Fixed::setRawBits(const int raw)
+void	Fixed::setRawBits(int const raw)
 {
 	value = raw;
 }
 
-float	Fixed::toFloat( void ) const
+float	Fixed::toFloat(void) const
 {
-	float	tofloat =  static_cast<float>(value / pow(2, rawBits));
-	return (tofloat);
+	return (static_cast<float>(value / pow(2, rawBits)));
 }
 
-int	Fixed::toInt( void  ) const
+int	Fixed::toInt( void ) const
 {
-	int	toint = static_cast<int>(value / pow(2, rawBits));
-	return (toint);
+	return (value / pow(2, rawBits));
 }
 
+Fixed	&Fixed::operator=(const Fixed& other)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other)
+		value = other.value;
+	return (*this);
+}
 
+std::ostream	&operator<<(std::ostream &os, const Fixed& other)
+{
+	os << other.toFloat();
+	return (os);
+}

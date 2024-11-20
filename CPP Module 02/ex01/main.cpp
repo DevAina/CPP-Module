@@ -5,23 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 10:02:17 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/20 10:03:17 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/20 11:09:21 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/20 11:13:41 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <iostream>
 
-int main( void ) 
+int main( void )
 {
 	Fixed a;
 	Fixed const b( 10 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
-
+	
 	a = Fixed( 1234.4321f );
-
+	
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
 	std::cout << "c is " << c << std::endl;

@@ -6,7 +6,7 @@
 /*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:04:37 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/20 21:07:49 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/21 09:33:53 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ class	Fixed
 		Fixed	operator--(int);
 		float	toFloat(void) const;
 		int		toInt(void) const;
+		static Fixed	min(Fixed &a, Fixed &b);
+		static Fixed	min(const Fixed &a, const Fixed &b);
+		static Fixed	max(Fixed &a, Fixed &b);
+		static Fixed	max(const Fixed &a, const Fixed &b);
 };
 
 std::ostream &operator<<(std::ostream &os, const Fixed& other);

@@ -6,7 +6,7 @@
 /*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 20:09:50 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/20 21:11:14 by trarijam         ###   ########.fr       */
+/*   Updated: 2024/11/21 09:41:26 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	Fixed::toInt( void ) const
 
 Fixed	&Fixed::operator=(const Fixed& other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 		value = other.value;
 	return (*this);
@@ -79,37 +78,31 @@ std::ostream	&operator<<(std::ostream &os, const Fixed& other)
 /*Surcharge comparaison operator*/
 bool	Fixed::operator<( const Fixed& other ) const
 {
-	std::cout << "Comparator operator < called" << std::endl;
 	return (value < other.value);
 }
 
 bool	Fixed::operator>( const Fixed& other ) const
 {
-	std::cout << "Comparator operator > called" << std::endl;
 	return (value > other.value);
 }
 
 bool	Fixed::operator>=( const Fixed& other ) const
 {
-	std::cout << "Comparator operator >= called" << std::endl;
 	return (value >= other.value);
 }
 
 bool	Fixed::operator<=( const Fixed& other ) const
 {
-	std::cout << "Comparator operator <= called" << std::endl;
 	return (value <= other.value);
 }
 
 bool	Fixed::operator==( const Fixed& other ) const
 {
-	std::cout << "Comparator operator == called" << std::endl;
 	return (value == other.value);
 }
 
 bool	Fixed::operator!=( const Fixed& other ) const
 {
-	std::cout << "Comparator operator != called" << std::endl;
 	return (value != other.value);
 }
 
@@ -117,26 +110,32 @@ bool	Fixed::operator!=( const Fixed& other ) const
 
 Fixed	Fixed::operator+(const Fixed& other) const
 {
-	std::cout << "Arithmetic operator + called";
-	return (this->value + other.value);
+	Fixed	result;
+	result.value = value + other.value;
+	return (result);
 }
 
 Fixed	Fixed::operator-(const Fixed& other) const
 {
-	std::cout << "Arithmetic operator - called";
-	return (this->value - other.value);
+	Fixed	result;
+	result.value = value - other.value;
+	return (result);
 }
 
 Fixed	Fixed::operator*(const Fixed& other) const
 {
-	std::cout << "Arithmetic operator * called";
-	return ((this->value * other.value) >> rawBits);
+	Fixed	result;
+	result.value = (value * other.value) >> rawBits;
+	return (result);
 }
 
 Fixed	Fixed::operator/(const Fixed& other) const
 {
-	std::cout << "Arithmetic operator / called";
-	return ((this->value << rawBits) /  other.value);
+	Fixed	result;
+	if (other.value == 0)
+		return (result);
+	result.value = (value << rawBits) / other.value;
+	return (result);
 }
 
 /*++x*/
@@ -164,4 +163,32 @@ Fixed	Fixed::operator--(int)
 	Fixed	tmp = *this;
 	--(*this);
 	return (tmp);
+}
+
+Fixed	Fixed::min(Fixed &a, Fixed &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+Fixed	Fixed::min(const Fixed &a, const Fixed &b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+Fixed	Fixed::max(Fixed &a, Fixed &b)
+{
+	if (b > a)
+		return (b);
+	return (a);
+}
+
+Fixed	Fixed::max(const Fixed &a, const Fixed &b)
+{
+	if (b > a)
+		return (b);
+	return (a);
 }

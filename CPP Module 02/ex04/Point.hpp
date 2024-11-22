@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 14:36:19 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/22 10:57:15 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/21 13:19:39 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/22 10:57:53 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Point.hpp"
-#include <iostream>
+#ifndef POINT_HPP
+# define POINT_HPP
 
-bool	bsp(const Point a, const Point b, const Point c, const Point point);
+# include "Fixed.hpp"
 
-int	main()
+class	Point
 {
-	Point a( 0, 5.0f);
-	Point b( 0, 5.0f);
-	Point c(0, 0);
-	Point x(0.0f, 0.0f);
+	private:
+		Fixed	_x;
+		Fixed	_y;
+	
+	public:
+		Point(void);
+		Point(float const x, float const y);
+		Point(const Point &point);
+		Point	&operator=(const Point &other);
+		~Point(void);
+		Fixed	getX( void ) const;
+		Fixed	getY( void ) const;
+		void		setX( Fixed &newx );
+		void		setY(  Fixed &newy );
+};
 
-	std::cout << bsp(a, b, c, x) << std::endl;
-}
+#endif

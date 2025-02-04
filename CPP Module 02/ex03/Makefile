@@ -2,7 +2,7 @@ NAME = Fixed
 
 FLAGS = -Wall -Werror -Wextra
 
-SRCS = main.cpp Fixed.cpp
+SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 

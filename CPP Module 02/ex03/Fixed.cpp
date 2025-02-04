@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 20:09:50 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/21 09:41:26 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/21 10:53:21 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/21 10:55:21 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,25 @@
 #include <iostream>
 #include <ostream>
 
-Fixed::Fixed( void ): value(0)
-{
-	std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed( void ): value(0) {}
 
-Fixed::Fixed(const Fixed &other): value(other.value)
-{
-	std::cout << "Copy constructor called" << std::endl;
-}
+Fixed::Fixed(const Fixed &other): value(other.value) {}
 
 Fixed::Fixed(const int nb)
 {
-	std::cout << "Int constructor called" << std::endl;
 	value = nb << rawBits;
 }
 
 Fixed::Fixed(const float nb)
 {
-	std::cout << "Float constructor called" << std::endl;
 	value = static_cast<int>(roundf(nb * pow(2, rawBits)));
 }
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int	Fixed::getRawBits( void ) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (rawBits);
 }
 
@@ -107,7 +97,6 @@ bool	Fixed::operator!=( const Fixed& other ) const
 }
 
 /*surcharge arithmetic operator*/
-
 Fixed	Fixed::operator+(const Fixed& other) const
 {
 	Fixed	result;

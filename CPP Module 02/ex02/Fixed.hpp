@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
+/*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 10:55:29 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/21 10:56:56 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/20 20:04:37 by trarijam          #+#    #+#             */
+/*   Updated: 2024/11/21 09:33:53 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FIXED_HPP
 
 #include <ostream>
-
 class	Fixed
 {
 	private:
@@ -53,5 +52,6 @@ class	Fixed
 };
 
 std::ostream &operator<<(std::ostream &os, const Fixed& other);
+
 
 #endif

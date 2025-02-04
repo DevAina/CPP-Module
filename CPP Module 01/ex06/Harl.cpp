@@ -6,7 +6,7 @@
 /*   By: trarijam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:17:37 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/16 17:33:54 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:21:36 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	Harl::complain(std::string level)
 	}
 	if (index_level == -1)
 	{
-		std::cerr << "\033[31mNO APPROPRIATE LEVEL\033[0m" << std::endl;
+		std::cout << "\033[31mNO APPROPRIATE LEVEL\033[0m" << std::endl;
 		return ;
 	}	
 }

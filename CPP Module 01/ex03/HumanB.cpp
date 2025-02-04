@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:57:01 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/14 13:08:22 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:19:24 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	HumanB::attack(void)
 {
 	if (weapon == NULL)
 	{
-		std::cerr << "NO WEAPON" << std::endl;
+		std::cout << "NO WEAPON" << std::endl;
 		return ;
 	}
 	std::cout << _name << " attacks with their " << weapon->getType() << std::endl;

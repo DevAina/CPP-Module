@@ -1,10 +1,10 @@
-NAME = ClapTrap
+NAME = ScavTrap
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 C++ = c++
 
-SRCS = main.cpp ClapTrap.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 
@@ -35,3 +35,4 @@ fclean : clean
 re : fclean all
 
 .PHONY : all re fclean clean
+

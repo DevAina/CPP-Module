@@ -26,7 +26,7 @@ ClapTrap::ClapTrap(const ClapTrap &other)
 	std::cout << "ClapTrap " << name << " created (Constructor copy)\n";
 }
 
-ClapTrap::ClapTrap(std::string nm): name(nm), hitPoints(10), EnergyPoints(10), AttackDammage(0)
+ClapTrap::ClapTrap(std::string& nm): name(nm), hitPoints(10), EnergyPoints(10), AttackDammage(0)
 {
 	std::cout << "ClapTrap " << name << " created.\n";
 }

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:02:53 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/09 16:11:14 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:29:34 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Cat::~Cat(void)
 	std::cout << RED << "Cat destroyed\n" << RESET;
 }
 
-void	Cat::makeSound(void)
+void	Cat::makeSound(void) const
 {
 	std::cout << RED << "Miauuuuuuuuuu Miauuuuuuuuuuuuuuuu.....!\n" << RESET;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtfa <trarijam@student.42antananarivo.mg>  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 19:40:07 by rtfa              #+#    #+#             */
-/*   Updated: 2025/02/04 18:02:27 by rtfa             ###   ########.fr       */
+/*   Created: 2025/02/09 15:20:06 by trarijam          #+#    #+#             */
+/*   Updated: 2025/02/09 15:20:10 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

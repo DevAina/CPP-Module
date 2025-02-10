@@ -1,0 +1,38 @@
+Classe Brain
+    Attributs:
+        - std::string ideas[100]
+    Méthodes:
+        + Constructeur Brain() : Affiche "Brain created"
+        + Destructeur ~Brain() : Affiche "Brain destroyed"
+
+Classe Animal
+    Méthodes:
+        + Destructeur virtuel ~Animal()
+        + Méthode virtuelle pure makeSound()
+
+Classe Dog : public Animal
+    Attributs:
+        - Brain* brain
+    Méthodes:
+        + Constructeur Dog() : Initialise brain, affiche "Dog created"
+        + Destructeur ~Dog() : Détruit brain, affiche "Dog destroyed"
+        + makeSound() : Affiche "Woof!"
+        + Constructeur de copie Dog(const Dog&) : Copie profonde de brain
+        + Opérateur d'affectation Dog& operator=(const Dog&) : Copie profonde de brain
+
+Classe Cat : public Animal
+    Attributs:
+        - Brain* brain
+    Méthodes:
+        + Constructeur Cat() : Initialise brain, affiche "Cat created"
+        + Destructeur ~Cat() : Détruit brain, affiche "Cat destroyed"
+        + makeSound() : Affiche "Meow!"
+        + Constructeur de copie Cat(const Cat&) : Copie profonde de brain
+        + Opérateur d'affectation Cat& operator=(const Cat&) : Copie profonde de brain
+
+Fonction main
+    Créer un tableau ou un vecteur de pointeurs Animal
+    Remplir le tableau avec des Dog et des Cat
+    Parcourir le tableau et appeler makeSound() sur chaque élément
+    Parcourir le tableau et appeler delete sur chaque élément
+    Vérifier les fuites de mémoire

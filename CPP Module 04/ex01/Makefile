@@ -2,7 +2,7 @@ NAME = Polymorphisme
 
 FLAGS = -Wall -Werror -Wextra
 
-SRCS = main.cpp Dog.cpp Cat.cpp Animal.cpp
+SRCS = main.cpp Dog.cpp Cat.cpp Animal.cpp Brain.cpp
 
 OBJS = ${SRCS:.cpp=.o}
 

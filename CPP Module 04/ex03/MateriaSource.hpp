@@ -19,7 +19,7 @@ class	AMateria;
 class MateriaSource:public IMateriaSource
 {
 	private:
-		Amateria	*learnedMateria[4];
+		AMateria	*learnedMateria[4];
 	
 	public:
 		MateriaSource(void);

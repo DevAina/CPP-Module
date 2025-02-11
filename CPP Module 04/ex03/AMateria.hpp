@@ -26,12 +26,12 @@ class AMateria
 		AMateria(void);
 		AMateria(const std::string& tp);
 		AMateria(const AMateria& other);
-		~AMateria(void);
+		virtual ~AMateria(void);
 		AMateria	&operator=(const AMateria& other);
 
 		std::string	getType(void) const;
-		virtual AMateria*	clone(void) = 0;
-		virtual void 		use(Icharacter& target) const;
+		virtual AMateria*	clone(void) const = 0;
+		virtual void 		use(ICharacter& target) const;
 };
 
 #endif

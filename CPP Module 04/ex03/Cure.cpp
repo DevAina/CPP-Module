@@ -12,12 +12,12 @@
 
 #include "Cure.hpp"
 
-Cure::Cure(void): AMateria("cure"), type("cure") 
+Cure::Cure(void): AMateria("cure")
 {
-
+	type = "cure";
 }
 
-Cure::Cure(const Cure& other)
+Cure::Cure(const Cure& other): AMateria(other)
 {
 	type = other.type;
 }
@@ -27,7 +27,7 @@ Cure::~Cure(void)
 
 }
 
-Cure	Cure::&operator=(const Cure &other)
+Cure	&Cure::operator=(const Cure &other)
 {
 	if (this != &other)
 		type = other.type;

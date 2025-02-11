@@ -12,12 +12,12 @@
 
 #include "Ice.hpp"
 
-Ice::Ice(void): AMateria("ice"), type("ice") 
+Ice::Ice(void): AMateria("ice") 
 {
-
+	type = "ice";
 }
 
-Ice::Ice(const Ice& other)
+Ice::Ice(const Ice& other): AMateria(other)
 {
 	type = other.type;
 }
@@ -27,7 +27,7 @@ Ice::~Ice(void)
 
 }
 
-Ice	Ice::&operator=(const Ice &other)
+Ice	&Ice::operator=(const Ice &other)
 {
 	if (this != &other)
 		type = other.type;
@@ -36,10 +36,10 @@ Ice	Ice::&operator=(const Ice &other)
 
 void	Ice::use(ICharacter &target) const
 {
-	std::cout << "* shoots an ice bolt at" << target.getName() << " *"<<<<std::endl;
+	std::cout << "* shoots an ice bolt at" << target.getName() << " *"<<std::endl;
 }
 
-void	Ice::clone(void) const
+Ice	*Ice::clone(void) const
 {
 	return (new Ice(*this));
 }

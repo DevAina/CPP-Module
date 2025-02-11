@@ -23,7 +23,7 @@ class	Ice:public AMateria
 		~Ice(void);
 		Ice	&operator=(const Ice& other);
 		Ice	*clone(void) const override;
-		void	use(Icharacter& target) const override;
+		void	use(ICharacter& target) const override;
 };
 
 #endif

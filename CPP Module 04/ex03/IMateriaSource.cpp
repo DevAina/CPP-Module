@@ -14,11 +14,15 @@
 
 IMateriaSource::IMateriaSource(void) {}
 
-IMateriaSource::IMateriaSource(const IMateriaSource& other) {}
+IMateriaSource::IMateriaSource(const IMateriaSource& other) 
+{
+	(void)other;
+}
 
 IMateriaSource::~IMateriaSource() {}
 
 IMateriaSource&	IMateriaSource::operator=(const IMateriaSource& other)
 {
+	(void)other;
 	return (*this);
 }

@@ -11,28 +11,29 @@
 /* ************************************************************************** */
 
 #include "Character.hpp"
+#include "AMateria.hpp"
 #include <cstring>
 #include <string>
 
-Character::Character(void): ICharcter(), name()
+Character::Character(void): ICharacter(), name()
 {
 	for (int i = 0; i < 4; i++)
 		inventory[i] = NULL;
 }
 
-Character::Character(const std::string &nm): ICharcter(), name(nm)
+Character::Character(const std::string &nm): ICharacter(), name(nm)
 {
 	for (int i = 0; i < 4; i++)
 		inventory[i] = NULL;
 }
 
-Character::Character(const Character& other)
+Character::Character(const Character& other): ICharacter(other)
 {
 	name = other.name;
 	for (int i = 0; i < 4; i++)
 	{
 		if (other.inventory[i])
-			inventory[i] = other.inventory[i].clone();
+			inventory[i] = other.inventory[i]->clone();
 		else
 			inventory[i] = NULL;
 	}
@@ -42,12 +43,11 @@ Character::~Character(void)
 {
 	for (int i = 0; i < 4; i++)
 	{
-		if (inventory[i])
-			delete inventory[i];
+		delete inventory[i];
 	}
 }
 
-Character	&Character::operator=(const other &other)
+Character	&Character::operator=(const Character &other)
 {
 	if (this != &other)
 	{
@@ -57,7 +57,7 @@ Character	&Character::operator=(const other &other)
 			if (inventory[i])
 				delete inventory[i];
 			if (other.inventory[i])
-				inventory[i] = other.inventory[i].clone();
+				inventory[i] = other.inventory[i]->clone();
 			else
 				inventory[i] = NULL;
 		}
@@ -76,7 +76,7 @@ void	Character::equip(AMateria *m)
 	{
 		if (!inventory[i])
 		{
-			inventory[i] = m;
+			inventory[i] = m->clone();
 			break;
 		}
 	}
@@ -88,8 +88,8 @@ void	Character::unequip(int idx)
 		inventory[idx] = NULL;
 }
 
-void	Character::use(int idx, Character& target) const
+void	Character::use(int idx, ICharacter& target)
 {
 	if (idx >=0 && idx <=3 && inventory[idx])
-		inventory[idx].use(target);
+		inventory[idx]->use(target);
 }

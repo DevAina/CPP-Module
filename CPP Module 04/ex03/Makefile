@@ -1,8 +1,8 @@
 NAME = InterfaceRecap
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
-SRCS = main.cpp AMateria.cpp ICharacter.cpp IMateriaSource.cpp
+SRCS = main.cpp AMateria.cpp ICharacter.cpp IMateriaSource.cpp MateriaSource.cpp Character.cpp Cure.cpp Ice.cpp 
 
 OBJS = ${SRCS:.cpp=.o}
 

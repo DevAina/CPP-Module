@@ -14,11 +14,15 @@
 
 ICharacter::ICharacter(void) {}
 
-ICharacter::ICharacter(const ICharacter& other) {}
+ICharacter::ICharacter(const ICharacter& other)
+{
+	(void)other;
+}
 
 ICharacter::~ICharacter() {}
 
 ICharacter &ICharacter::operator=(const ICharacter& other)
 {
+	(void)other;
 	return (*this);
 }

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Cure_HPP
-# define Cure_HPP
+#ifndef CURE_HPP
+# define CURE_HPP
 
 # include "AMateria.hpp"
 
-class	Cure:public AMateria
+class	Cure : public AMateria
 {
 	public:
 		Cure(void);
@@ -23,7 +23,7 @@ class	Cure:public AMateria
 		~Cure(void);
 		Cure	&operator=(const Cure& other);
 		Cure	*clone(void) const override;
-		void	use(Icharacter& target) const override;
+		void	use(ICharacter& target) const override;
 };
 
 #endif

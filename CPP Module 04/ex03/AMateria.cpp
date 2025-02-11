@@ -27,7 +27,7 @@ AMateria::~AMateria(void)
 
 }
 
-AMateria	AMateria::&operator=(const AMateria &other)
+AMateria	&AMateria::operator=(const AMateria &other)
 {
 	if (this != &other)
 		type = other.type;

@@ -23,12 +23,13 @@ class	Character: public ICharacter
 
 	public:
 		Character(void);
+		Character(const std::string& nm);
 		Character(const Character &other);
 		~Character(void);
 		Character	&operator=(const Character &other);
 		std::string const &getName() const override;
-		void	equip(AMateria *m) const override;
-		void	unequip(int idx) const override;
+		void	equip(AMateria *m) override;
+		void	unequip(int idx) override;
 		void	use(int idx, Character& target) const override;
 };
 

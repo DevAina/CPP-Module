@@ -14,7 +14,7 @@
 # define MATERIASOURCE_HPP
 
 # include "IMateriaSource.hpp"
-class	Amateria;
+class	AMateria;
 
 class MateriaSource:public IMateriaSource
 {
@@ -26,7 +26,7 @@ class MateriaSource:public IMateriaSource
 		MateriaSource(const MateriaSource& other);
 		~MateriaSource(void);
 		MateriaSource	&operator=(const MateriaSource& other);
-		void	learnMateria(Amateria* m) override;
+		void	learnMateria(AMateria* m) override;
 		AMateria* createMateria(std::string const & type) override;
 };
 

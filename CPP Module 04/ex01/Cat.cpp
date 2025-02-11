@@ -33,6 +33,18 @@ Cat::~Cat(void)
 	std::cout << RED << "Cat destroyed\n" << RESET;
 }
 
+Cat &Cat::operator=(const Cat& other)
+{
+	if (this != &other)
+	{
+		delete brain;
+		brain = new Brain();
+		brain = other.brain;
+		type = other.type;
+	}
+	return (*this);
+}
+
 void	Cat::makeSound(void) const
 {
 	std::cout << RED << "Miauuuuuuuuuu Miauuuuuuuuuuuuuuuu.....!\n" << RESET;

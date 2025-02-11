@@ -33,6 +33,19 @@ Dog::~Dog(void)
 	std::cout << YELLOW << "Dog destroyed\n" << RESET;
 }
 
+Dog &Dog::operator=(const Dog& other)
+{
+	if (this != &other)
+	{
+		delete brain;
+		brain = new Brain();
+		brain = other.brain;
+		type = other.type;
+	}
+	return (*this);
+}
+
+
 void	Dog::makeSound(void)
 {
 	std::cout << YELLOW << "Woaf.....!\n" << RESET;

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Amateria.cpp                                       :+:      :+:    :+:   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:51:30 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 20:51:31 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/11 09:25:36 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include <ostream>
 
 AMateria::AMateria(void): type("Incognito") {}
 
@@ -36,4 +37,9 @@ AMateria	AMateria::&operator=(const AMateria &other)
 std::string	AMateria::getType(void) const
 {
 	return (type);
+}
+
+void	AMateria::use(ICharacter &target) const
+{
+	std::cout << "****** " << target.getName() <<std::endl;
 }

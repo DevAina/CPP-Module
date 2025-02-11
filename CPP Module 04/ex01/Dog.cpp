@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:11:16 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 09:15:16 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:13:35 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ Dog::~Dog(void)
 	delete brain;
 	std::cout << YELLOW << "Dog destroyed\n" << RESET;
 }
+
+Dog &Dog::operator=(const Dog& other)
+{
+	if (this != &other)
+	{
+		delete brain;
+		brain = new Brain();
+		brain = other.brain;
+		type = other.type;
+	}
+	return (*this);
+}
+
 
 void	Dog::makeSound(void) const
 {

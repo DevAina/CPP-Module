@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:45 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/11 19:38:23 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:52:46 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 #include "ICharacter.hpp"
 #include "Character.hpp"
 
-int main() {
+int main()
+{
     std::cout << "=== Test 1 : Création de Materias ===" << std::endl;
     AMateria* ice = new Ice();
     AMateria* cure = new Cure();

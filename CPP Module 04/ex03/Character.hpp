@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:28:42 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 20:34:21 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:37:55 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 # define Character_HPP
 
 # include "ICharacter.hpp"
+# include "materiasol.hpp"
 
 class	Character: public ICharacter
 {
 	private:
 		std::string	name;
 		AMateria*	inventory[4];
+		t_materiasol	*materiasol;
 
 	public:
 		Character(void);

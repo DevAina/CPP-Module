@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:04:21 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/11 15:19:02 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:59:46 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	MateriaSource::learnMateria(AMateria* m)
 	{
 		if (!learnedMateria[i])
 		{
-			learnedMateria[i] = m->clone();
+			learnedMateria[i] = m;
 			break;
 		}
 	}

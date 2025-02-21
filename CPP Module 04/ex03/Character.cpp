@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:39:59 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/21 18:59:08 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:01:19 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ Character::~Character(void)
 			delete tmp;
 		}
 	}
-	// for (int i = 0; i < 4; i++)
-	// {
-	// 	delete inventory[i];
-	// }
 }
 
 Character	&Character::operator=(const Character &other)

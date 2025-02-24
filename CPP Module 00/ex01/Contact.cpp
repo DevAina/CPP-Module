@@ -6,12 +6,14 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 09:38:23 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/18 12:04:53 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:01:10 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include "repertory.hpp"
+#include <cstring>
+#include <string>
 
 Contact::Contact() {}
 
@@ -43,4 +45,54 @@ void	Contact::display(void)
 	std::cout << std::setw(10) << truncate(firstName) << "|"
 				<< std::setw(10) << truncate(lastName) << "|"
 				<< std::setw(10) << truncate(nickName) << "|" << std::endl;
+}
+
+std::string	Contact::getfirstName(void) const
+{
+	return (firstName);
+}
+
+std::string	Contact::getlastName(void) const
+{
+	return (lastName);
+}
+
+std::string Contact::getnickName(void) const
+{
+	return (nickName);
+}
+
+std::string	Contact::getPhoneNumber(void) const
+{
+	return (PhoneNumber);
+}
+
+std::string Contact::getdarkestSecret(void) const
+{
+	return (darkestSecret);
+}
+
+void	Contact::setfirstName(const std::string& fN)
+{
+	firstName = fN;
+}
+
+void	Contact::setlastName(const std::string& lN)
+{
+	lastName = lN;
+}
+
+void	Contact::setnickName(const std::string& nN)
+{
+	nickName = nN;
+}
+
+void	Contact::setdarkestSecret(const std::string& dS)
+{
+	darkestSecret = dS;
+}
+
+void	Contact::setPhoneNumber(const std::string& PN)
+{
+	PhoneNumber = PN;
 }

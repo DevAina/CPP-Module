@@ -2,32 +2,33 @@ NAME = megaphone
 
 FLAGS = -Wall -Werror -Wextra
 
-SRC = megaphone.cpp
+SRCS = megaphone.cpp
 
-OBJ = ${SRC:.cpp=.o}
+OBJS = ${SRCS:.cpp=.o}
 
-all : ${NAME}
-
-#Colors
+#COLORS
 YELLOW = \033[33m
 CYAN = \033[36m
-RESET = \033[0m
+RESET = \033[0m	
+
+all	: ${NAME}
 
 %.o : %.cpp
-	echo "${YELLOW}Compiling $< ... ${RESET}"
-	@c++ -c ${FLAGS} -o ${<:.cpp=.o}
+	@ echo "${YELLOW}Compiling $< ... ${RESET}"
+	@c++ ${FLAGS} -c $< -o $@
 
-${NAME} : ${OBJ}
-	@c++ -o ${NAME} ${OBJ} ${FLAGS}
-	echo "${CYAN}${NAME} has been succefully built! ${RESET}"
+${NAME} : ${OBJS}
+	@c++ ${FLAGS} ${OBJS} -o ${NAME}
+	@echo "${CYAN}${NAME} has been succefully built! ${RESET}"
 
-clean :
-	rm -rf ${OBJ}
+clean:
+	@echo "\033[31mRemove file objects ...${RESET}"
+	@rm -rf ${OBJS}
 
 fclean : clean
-	rm -rf ${NAME}
+	@echo "\033[31mRemove binairie file : ${NAME} ${RESET}"
+	@rm -rf ${NAME}
 
-re: fclean all
+re : fclean all
 
-.PHONY: re fclean clean all
-
+.PHONY : all fclean re clean

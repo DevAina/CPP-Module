@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 10:32:26 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/10 13:02:13 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/12 14:35:34 by trarijam          #+#    #+#             */
+/*   Updated: 2025/02/24 16:19:56 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <iomanip>
 #include <ctime>
+#include <iterator>
 #include "Account.hpp"
 
-//Initialise variable static
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
@@ -69,7 +69,7 @@ void	Account::displayAccountsInfos(void)
 	std::cout << "accounts:" << _nbAccounts << ";"
 	    		<< "total:" << getTotalAmount() << ";"
 				<< "deposits:" << getNbDeposits() << ";"
-				<< "withdrawls:" << getNbWithdrawals()  << std::endl;
+				<< "withdrawals:" << getNbWithdrawals()  << std::endl;
 }
 
 int		Account::checkAmount(void) const
@@ -88,7 +88,7 @@ void	Account::makeDeposit(int Deposit)
 	_totalAmount += Deposit;
 	_totalNbDeposits++;
 	std::cout << "amount:" << _amount << ";"
-				<< "nb_deposit:" << _nbDeposits << std::endl;	
+				<< "nb_deposits:" << _nbDeposits << std::endl;	
 }
 
 bool	Account::makeWithdrawal(int Withdrawal)
@@ -96,18 +96,19 @@ bool	Account::makeWithdrawal(int Withdrawal)
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
                 << "p_amount:" << _amount << ";"
-                << "withdrawal:" << Withdrawal << ";";
+                << "withdrawal:";
 	if (Withdrawal > checkAmount())
 	{
-		std::cerr << "\033[31m Refused \033[0m\n";
+		std::cout << "refused\n";
 		return (true);
 	}
+	std::cout << Withdrawal << ";";
     _amount -= Withdrawal;
     _nbWithdrawals++;
 	_totalAmount -= Withdrawal;
 	_totalNbWithdrawals++;
 	std::cout << "amount:" << _amount << ";"
-                << "nb_withdrawal:" << _nbWithdrawals << std::endl;
+                << "nb_withdrawals:" << _nbWithdrawals << std::endl;
 	return (false);
 }
 
@@ -119,11 +120,8 @@ void	Account::displayStatus(void) const
 				<< "deposits:" << _nbDeposits << ";"
 				<< "withdrawals:" << _nbWithdrawals << std::endl;
 }
-/*
-	Display timestamp: format YY/MM/DD_HMS
-	--> get time now in seconds (use std::time)
-	--> convert time now for struct time_local
-*/
+
+
 void	Account::_displayTimestamp(void)
 {
 	std::time_t	now = std::time(0);
@@ -137,4 +135,3 @@ void	Account::_displayTimestamp(void)
 						<< tm->tm_sec
 				<< "] ";
 }
-

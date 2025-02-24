@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 13:54:38 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/18 12:02:51 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:48:37 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(void)
         else if (input.compare("EXIT") == 0)
 			return (0);
 		else
-			std::cerr << "\033[31m Choice not valid (ADD or EXIT or SEARCH) \033[0m" << std::endl;
+			std::cout << "\033[31m Choice not valid (ADD or EXIT or SEARCH) \033[0m" << std::endl;
     }
     return (0);
 }

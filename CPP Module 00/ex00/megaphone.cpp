@@ -5,30 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 09:58:50 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/04 10:06:31 by trarijam         ###   ########.fr       */
+/*   Created: 2024/11/12 09:14:51 by trarijam          #+#    #+#             */
+/*   Updated: 2025/02/23 11:43:06 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <ctype.h>
+#include <cctype>
 
 void	megaphone(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	for (i = 1 ; i < argc ; i++)
+	for (i = 1; i < argc ; i++)
 	{
-		for (j = 0; argv[i][j] != '\0' ; j++)
+		for (j = 0; argv[i][j] ; j++)
 		{
 			if (argv[i][j] >= 'a' && argv[i][j] <= 'z')
-				std::cout << (char)toupper(argv[i][j]);
+				std::cout << static_cast<char>(std::toupper(argv[i][j]));
 			else
 				std::cout << argv[i][j];
 		}
-		std::cout << " ";
 	}
+	std::cout << "\n";
 }
 
 int	main(int argc, char **argv)
@@ -37,9 +37,9 @@ int	main(int argc, char **argv)
 		megaphone(argc, argv);
 	else
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		std::cout << "\033[31m" << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\033[0m" << std::endl;
 		return (1);
 	}
-	std::cout << "\n";
 	return (0);
 }
+

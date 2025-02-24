@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 09:08:22 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/14 13:21:02 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:52:40 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,9 @@
 
 Zombie* zombieHorde( int N, std::string name );
 
-int main(int argc, char **argv)
+int main(void)
 {
-	if (argc == 1)
-		return (1);
-	if (argc == 2)
-	{
-    	Zombie* zombies = zombieHorde(std::stoi(argv[1]), "Bob");
-    	delete [] zombies;
-	}
+    Zombie* zombies = zombieHorde(6, "Bob");
+    delete [] zombies;
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:38:14 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/04 09:20:01 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:28:19 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 
-		std::ofstream	output_file(output_filename.append(".replace"));
+		std::ofstream	output_file;
+		output_filename += ".replace";
+		output_file.open(output_filename.c_str());
 		if (!output_file.is_open())
 		{
 			std::cout << "Error to open output file." << std::endl;
@@ -46,7 +48,7 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		std::cout << "Error: usage: ./sed_be_gone name_file old_word new_word" << std::endl;
+		std::cout << "Error: usage: ./sedBeGone name_file old_word new_word" << std::endl;
 		return (1);
 	}
 }

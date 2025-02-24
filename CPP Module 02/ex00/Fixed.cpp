@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:32:23 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/19 09:45:29 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:48:53 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &other): value(other.value)
+Fixed::Fixed(const Fixed &other)
 {
+	*this = other;
 	std::cout << "Copy constructor called" << std::endl;
 }
 

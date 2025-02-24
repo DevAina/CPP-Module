@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 15:15:34 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/09 15:15:39 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:45:57 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ std::string	replace(std::string line, std::string old_word, std::string new_word
 	size_t		lenOldWord;
 
 	lenOldWord = old_word.length();
+	if (lenOldWord == 0)
+		return (line);
 	while (pos < line.length())
 	{
 		size_t	index_found = line.find(old_word, pos);

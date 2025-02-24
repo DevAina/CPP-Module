@@ -1,6 +1,6 @@
 NAME = SedBeGone
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 SRCS = main.cpp replace.cpp
 

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:17:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/09 15:31:27 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:59:00 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ void	Harl::error(void)
 
 void	Harl::complain(std::string level)
 {
-	void (Harl::*complains[4])(void) = {
-		&Harl::debug,
-		&Harl::info,
-		&Harl::warning,
-		&Harl::error
-	};
 	int	index_level = -1;
 	std::string	levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
@@ -66,17 +60,17 @@ void	Harl::complain(std::string level)
 			std::cout << "\033[1;32mDEBUG\033[0m" << std::endl;
 			debug();
 			std::cout << "\n";
-			[[fallthrough]];
+			//fall_through;
 		case 1:
 			std::cout << "\033[1;32mINFO\033[0m" << std::endl;
 			info();
 			std::cout << "\n";
-			[[fallthrough]];
+			//fall_througth;
 		case 2:
 			std::cout << "\033[1;32mWARNING\033[0m" << std::endl;
 			warning();
 			std::cout << "\n";
-			[[fallthrough]];
+			//fall_througth;
 		case 3:
 			std::cout << "\033[1;32mERROR\033[0m" << std::endl;
 			error();

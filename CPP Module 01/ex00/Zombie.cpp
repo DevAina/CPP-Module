@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 09:07:50 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/14 13:20:46 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:39:30 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ Zombie::~Zombie()
 	std::cout << "\033[0m";
 }
 
-void    Zombie::announce(void)
+std::string	Zombie::getName(void) const
+{
+	return (name);
+}
+
+void    Zombie::announce(void) const
 {
     std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }

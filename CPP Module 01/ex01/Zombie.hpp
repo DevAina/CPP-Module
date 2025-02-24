@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 09:08:34 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/14 13:21:18 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/24 09:51:36 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ class  Zombie
         Zombie();
         ~ Zombie();
 
-		void	setName(std::string name);
+        void    announce() const;
+		void	setName(std::string& nm);
+		std::string	getName(void) const;
 };
 
 #endif

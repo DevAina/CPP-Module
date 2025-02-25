@@ -6,14 +6,16 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:36:53 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/20 19:39:05 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 08:58:23 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	FIXED_HPP
 # define FIXED_HPP
 
+#include <iostream>
 #include <ostream>
+
 class	Fixed
 {
 	private:

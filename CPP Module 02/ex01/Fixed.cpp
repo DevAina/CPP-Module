@@ -6,14 +6,12 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:43:45 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/20 11:18:03 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 08:58:05 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 #include <cmath>
-#include <iostream>
-#include <ostream>
 
 Fixed::Fixed( void ): value(0)
 {

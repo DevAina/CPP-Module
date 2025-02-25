@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:36:47 by trarijam          #+#    #+#             */
-/*   Updated: 2024/11/21 15:38:49 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:40:33 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ Point::Point(float const x, float const y): _x(x), _y(y) {}
 
 Point::Point(const Point &point)
 {
-	_x = point._x;
-	_y = point._y;
+	static_cast<Fixed>(_x) = point._x;
+	static_cast<Fixed>(_y) = point._y;
 }
 
 Point	&Point::operator=(const Point &other)
 {
 	if (this != &other)
 	{
-		_x = other._x;
-		_y = other._y;
+		static_cast<Fixed>(_x) = other._x;
+		static_cast<Fixed>(_y) = other._y;
 	}
 	return (*this);
 }
@@ -42,14 +42,4 @@ Fixed	Point::getX(void) const
 Fixed	Point::getY(void) const
 {
 	return (_y);
-}
-
-void	Point::setX(Fixed &newx)
-{
-	_x = newx;
-}
-
-void	Point::setY(Fixed &newy)
-{
-	_y = newy;
 }

@@ -1,6 +1,6 @@
 NAME = FragTrap
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 C++ = c++
 

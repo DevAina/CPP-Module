@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:28:47 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/06 16:27:27 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:42:30 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@
 
 DiamondTrap::DiamondTrap(void): ScavTrap(), FragTrap(), name("Incognito")
 {
-	hitPoints = FragTrap::hitPoints;
-	EnergyPoints = ScavTrap::EnergyPoints;
-	AttackDammage = FragTrap::AttackDammage;
+	hitPoints = 100;
+	EnergyPoints = 50;
+	AttackDammage = 30;
 	std::cout << "DiamondTrap Constructor default call"<< std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string &nm): ClapTrap(nm.append("_clap_name")), ScavTrap(nm), FragTrap(nm), name(nm)
+DiamondTrap::DiamondTrap(std::string &nm): ClapTrap(nm), ScavTrap(nm), FragTrap(nm), name(nm)
 {
-	hitPoints = FragTrap::hitPoints;
-	EnergyPoints = ScavTrap::EnergyPoints;
-	AttackDammage = FragTrap::AttackDammage;
+	ClapTrap::name = nm + "_clap_name";
+	hitPoints = 100;
+	EnergyPoints = 50;
+	AttackDammage = 30;
 	std::cout << "DiamondTrap " << name << " created\n";
 }
 
@@ -50,7 +51,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
 	if (this != &other)
 	{
 		std::cout << "Copy assignement call(DiamondTrap)"<< std::endl;
-		name = other.name;
+		this->name = other.name;
 		hitPoints = other.hitPoints;
 		EnergyPoints = other.EnergyPoints;
 		AttackDammage = other.AttackDammage;
@@ -66,4 +67,10 @@ void	DiamondTrap::attack(const std::string& target)
 void	DiamondTrap::whoAmI(void)
 {
 	std::cout << "I am " << name << " and my ClapTrap name is " << ClapTrap::name << std::endl;	
+}
+
+
+std::string	DiamondTrap::getName(void) const
+{
+	return (this->name);
 }

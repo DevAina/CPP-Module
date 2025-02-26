@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 15:19:08 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/09 15:19:10 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:15:01 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ ClapTrap::ClapTrap(void): name("Inconnu"), hitPoints(10), EnergyPoints(10), Atta
 
 ClapTrap::ClapTrap(const ClapTrap &other)
 {
-	name = other.name;
-	hitPoints = other.hitPoints;
-	EnergyPoints = other.EnergyPoints;
-	AttackDammage = other.AttackDammage;
+	*this = other;
 	std::cout << "ClapTrap " << name << " created (Constructor copy)\n";
 }
 
@@ -33,9 +30,9 @@ ClapTrap::ClapTrap(std::string& nm): name(nm), hitPoints(10), EnergyPoints(10), 
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other)
 {
+	std::cout << "Copy assignement call\n";
 	if (this != &other)
 	{
-		std::cout << "Copy assignement call\n";
 		name = other.name;
 		hitPoints = other.EnergyPoints;
 		AttackDammage = other.AttackDammage;
@@ -56,8 +53,11 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	hitPoints -= amount;
-	std::cout << "ClapTrap " << name << " takes " << amount << " damage!\n";
+	if (hitPoints != 0)
+	{
+		hitPoints -= amount;
+		std::cout << "Takes " << amount << " damage!\n";
+	}
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
@@ -66,8 +66,48 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		EnergyPoints--;
 		hitPoints += amount;
-		std::cout << "ClapTrap " << name << "is repaired by " << amount << " points!\n";
+		std::cout << "Repaired by " << amount << " points!\n";
 	}
+}
+
+std::string	ClapTrap::getName(void) const
+{
+	return (name);
+}
+
+int		ClapTrap::getHitPoints(void) const
+{
+	return (hitPoints);
+}
+
+int	ClapTrap::getEnergyPoints(void) const
+{
+	return (EnergyPoints);
+}
+
+int	ClapTrap::getAttackDammage(void) const
+{
+	return (AttackDammage);
+}
+
+void	ClapTrap::setName(std::string nm)
+{
+	name = nm;
+}
+
+void	ClapTrap::setHitPoijnts(int hp)
+{
+	hitPoints = hp;
+}
+
+void	ClapTrap::setEnergyPoints(int ep)
+{
+	EnergyPoints = ep;
+}
+
+void	ClapTrap::setAttackDammage(int ad)
+{
+	AttackDammage = ad;
 }
 
 ClapTrap::~ClapTrap(void)

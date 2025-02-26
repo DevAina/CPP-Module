@@ -1,6 +1,6 @@
 NAME = DiamondTrap
 
-FLAGS = -Wall -Werror -Wextra -Wshadow
+FLAGS = -Wall -Werror -Wextra
 
 C++ = c++
 

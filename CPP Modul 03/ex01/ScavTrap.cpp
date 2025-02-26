@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 19:32:52 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/04 20:00:54 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:28:58 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ ScavTrap::ScavTrap(std::string& nm): ClapTrap(nm)
 
 ScavTrap::ScavTrap(const ScavTrap& other): ClapTrap(other)
 {
-	name = other.name;
-	hitPoints = other.hitPoints;
-	EnergyPoints = other.EnergyPoints;
-	AttackDammage = other.AttackDammage;
+	*this = other;
 	std::cout << "ScavTrap " << name << " created";
 	std::cout << "(Constructor copy call)\n";
 }
@@ -46,7 +43,13 @@ ScavTrap::~ScavTrap()
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other)
 {
-	ClapTrap::operator=(other);
+	if (this != &other)
+	{
+		name = other.name;
+		hitPoints = other.hitPoints;
+		EnergyPoints = other.EnergyPoints;
+		AttackDammage = other.AttackDammage;
+	}
 	std::cout << "ScavTrap " << name << " assigned";
 	return (*this);
 }
@@ -60,23 +63,6 @@ void	ScavTrap::attack(const std::string& target)
 				<< ", causing " << AttackDammage << " points of damage!\n";
 	}
 }
-
-void	ScavTrap::takeDamage(unsigned int amount)
-{
-	hitPoints -= amount;
-	std::cout << "ScavTrap " << name << " takes " << amount << " damage!\n";
-}
-
-void	ScavTrap::beRepaired(unsigned int amount)
-{
-	if (hitPoints != 0 && EnergyPoints != 0)
-	{
-		EnergyPoints--;
-		hitPoints += amount;
-		std::cout << "ScavTrap " << name << " is repaired by " << amount << " points!\n";
-	}
-}
-
 
 void	ScavTrap::guardGate(void)
 {

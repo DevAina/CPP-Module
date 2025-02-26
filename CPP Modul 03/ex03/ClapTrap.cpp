@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 15:20:06 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/09 15:20:10 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:19:18 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	ClapTrap::attack(const std::string& target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	hitPoints -= amount;
-	std::cout << "ClapTrap " << name << " takes " << amount << " damage!\n";
+	if (hitPoints != 0)
+	{
+		hitPoints -= amount;
+		std::cout << "Takes " << amount << " damage!\n";
+	}
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
@@ -66,8 +69,48 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		EnergyPoints--;
 		hitPoints += amount;
-		std::cout << "ClapTrap " << name << "is repaired by " << amount << " points!\n";
+		std::cout << "Repaired by " << amount << " points!\n";
 	}
+}
+
+std::string	ClapTrap::getName(void) const
+{
+	return (name);
+}
+
+int		ClapTrap::getHitPoints(void) const
+{
+	return (hitPoints);
+}
+
+int	ClapTrap::getEnergyPoints(void) const
+{
+	return (EnergyPoints);
+}
+
+int	ClapTrap::getAttackDammage(void) const
+{
+	return (AttackDammage);
+}
+
+void	ClapTrap::setName(std::string nm)
+{
+	name = nm;
+}
+
+void	ClapTrap::setHitPoijnts(int hp)
+{
+	hitPoints = hp;
+}
+
+void	ClapTrap::setEnergyPoints(int ep)
+{
+	EnergyPoints = ep;
+}
+
+void	ClapTrap::setAttackDammage(int ad)
+{
+	AttackDammage = ad;
 }
 
 ClapTrap::~ClapTrap(void)

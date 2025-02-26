@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 07:06:05 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/06 14:21:52 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:37:32 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ class FragTrap: virtual public ClapTrap
 		FragTrap& operator=(const FragTrap& other);
 		/*******Redefinition function******/
 		void	attack(const std::string& target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
 
 		void highFivesGuys(void);
 };

@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap(void): ClapTrap()
 {
-	std::cout << "Default constructor call\n";
+	std::cout << "FragTrap Default constructor call\n";
 	name = "Inconnu";
 	hitPoints = 100;
 	EnergyPoints = 100;
@@ -31,10 +31,7 @@ FragTrap::FragTrap(std::string& nm): ClapTrap(nm)
 
 FragTrap::FragTrap(const FragTrap& other): ClapTrap(other)
 {
-	name = other.name;
-	hitPoints = other.hitPoints;
-	EnergyPoints = other.EnergyPoints;
-	AttackDammage = other.AttackDammage;
+	*this = other;
 	std::cout << "FragTrap " << name << " created";
 	std::cout << "(Constructor copy call)\n";
 }
@@ -46,7 +43,13 @@ FragTrap::~FragTrap()
 
 FragTrap& FragTrap::operator=(const FragTrap &other)
 {
-	ClapTrap::operator=(other);
+	if (this != &other)
+	{
+		name = other.name;
+		hitPoints = other.hitPoints;
+		EnergyPoints = other.EnergyPoints;
+		AttackDammage = other.AttackDammage;
+	}
 	std::cout << "FragTrap " << name << " assigned";
 	return (*this);
 }
@@ -58,22 +61,6 @@ void	FragTrap::attack(const std::string& target)
 		EnergyPoints--;
 		std::cout << "FragTrap " << name << " attack " << target
 				<< ", causing " << AttackDammage << " points of damage!\n";
-	}
-}
-
-void	FragTrap::takeDamage(unsigned int amount)
-{
-	hitPoints -= amount;
-	std::cout << "FragTrap " << name << " takes " << amount << " damage!\n";
-}
-
-void	FragTrap::beRepaired(unsigned int amount)
-{
-	if (hitPoints != 0 && EnergyPoints != 0)
-	{
-		EnergyPoints--;
-		hitPoints += amount;
-		std::cout << "FragTrap " << name << " is repaired by " << amount << " points!\n";
 	}
 }
 

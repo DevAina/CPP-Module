@@ -35,9 +35,9 @@ Animal::~Animal(void)
 
 Animal& Animal::operator=(const Animal& other)
 {
+	std::cout << GREEN << "Animal: copy assignement call\n" << RESET;
 	if (this != &other)
 	{
-		std::cout << GREEN << "Animal: copy assignement call\n" << RESET;
 		type = other.type;
 	}
 	return (*this);

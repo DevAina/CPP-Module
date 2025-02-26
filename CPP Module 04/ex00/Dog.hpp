@@ -22,7 +22,7 @@ class	Dog: public Animal
 		Dog(const Dog &other);
 		~Dog(void);
 		Dog&	operator=(const Dog& other);
-		void makeSound(void) const override;
+		void makeSound(void) const;
 };
 
 #endif

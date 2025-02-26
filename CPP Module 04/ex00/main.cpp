@@ -12,37 +12,45 @@
 
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongCat.hpp"
 
 int main(void)
 {
     {
+        std::cout << YELLOW << "----------------------------" << RESET << std::endl;
         std::cout << "Test 1: Generic Animal" << std::endl;
         Animal* animal = new Animal();
         animal->makeSound();
         std::cout << "Type: " << animal->getType() << std::endl;
         delete animal;
         std::cout << std::endl;
+        std::cout << YELLOW << "----------------------------" << RESET << std::endl;
     }
 
     {
+        std::cout << RED << "----------------------------" << RESET << std::endl;
         std::cout << "Test 2: Dog" << std::endl;
         Dog* dog = new Dog();
         dog->makeSound();
         std::cout << "Type: " << dog->getType() << std::endl;
         delete dog;
         std::cout << std::endl;
+        std::cout << RED << "----------------------------" << RESET << std::endl;
     }
 
     {
+        std::cout << GREEN << "----------------------------" << RESET << std::endl;
         std::cout << "Test 3: Cat" << std::endl;
         Cat* cat = new Cat();
         cat->makeSound();
         std::cout << "Type: " << cat->getType() << std::endl;
         delete cat;
         std::cout << std::endl;
+        std::cout << GREEN << "----------------------------" << RESET << std::endl;
     }
 
     {
+        std::cout << YELLOW << "----------------------------" << RESET << std::endl;
         std::cout << "Test 4: Polymorphism with Animal array" << std::endl;
         Animal* animals[3];
         animals[0] = new Dog();
@@ -55,9 +63,11 @@ int main(void)
             delete animals[i];
         }
         std::cout << std::endl;
+        std::cout << YELLOW << "----------------------------" << RESET << std::endl;
     }
 
     {
+        std::cout << RED << "----------------------------" << RESET << std::endl;
         std::cout << "Test 5: Object copying" << std::endl;
         Dog dog1;
         Dog dog2 = dog1;
@@ -69,7 +79,17 @@ int main(void)
         cat2.makeSound();
         std::cout << "Type: " << cat2.getType() << std::endl;
         std::cout << std::endl;
+        std::cout << RED << "----------------------------" << RESET << std::endl;
     }
 
+
+    {
+        std::cout << GREEN << "----------------------------" << RESET << std::endl;
+        std::cout << "Test6: WrongAnimal and WrongCat" << std::endl;
+        WrongAnimal* wronganimal = new WrongCat();
+        wronganimal->makeSound();
+        delete wronganimal;
+        std::cout << GREEN << "----------------------------" << RESET << std::endl;
+    }
     return (0);
 }

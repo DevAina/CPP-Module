@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:06:52 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 09:14:41 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:21:47 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ int	main(void)
 
     for (int i = 0; i < TOTAL_ANIMALS; i++)
         delete zoo[i];
+    Dog dog;
+    Dog dog1 = dog;
+    dog1.makeSound();
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:39:59 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/26 13:55:18 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:42:56 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Character::Character(void): ICharacter(), name()
 	}
 }
 
-Character::Character(const std::string &nm): ICharacter(), name(nm)
+Character::Character(const std::string nm): ICharacter(), name(nm)
 {
 	materiasol = NULL;
 	for (int i = 0; i < 4; i++)
@@ -35,7 +35,6 @@ Character::Character(const std::string &nm): ICharacter(), name(nm)
 
 Character::Character(const Character& other): ICharacter(other)
 {
-	materiasol = NULL;
 	name = other.name;
 	for (int i = 0; i < 4; i++)
 	{
@@ -58,7 +57,8 @@ Character::~Character(void)
 		{
 			tmp = materiasol;
 			materiasol = materiasol->next;
-			delete tmp;
+			if (tmp)
+				delete tmp;
 		}
 	}
 }

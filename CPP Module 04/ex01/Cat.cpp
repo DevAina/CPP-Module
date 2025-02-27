@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:02:53 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/27 11:46:20 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:19:47 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Cat::Cat(void): Animal()
 	std::cout << RED << "Cat(Constructor default)\n" << RESET;
 }
 
-Cat::Cat(const Cat &other): Animal(other)
+Cat::Cat(const Cat &other): Animal(other), brain(NULL)
 {
 	std::cout << RED << "Cat(constructor copy call)\n" << RESET;
 	*this = other;
@@ -27,7 +27,8 @@ Cat::Cat(const Cat &other): Animal(other)
 
 Cat::~Cat(void)
 {
-	delete brain;
+	if (brain)
+		delete brain;
 	std::cout << RED << "Cat destroyed\n" << RESET;
 }
 
@@ -35,7 +36,8 @@ Cat &Cat::operator=(const Cat& other)
 {
 	if (this != &other)
 	{
-		delete brain;
+		if (brain)
+			delete brain;
 		brain = new Brain();
 		brain = other.brain;
 		type = other.type;

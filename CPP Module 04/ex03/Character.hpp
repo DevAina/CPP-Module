@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:28:42 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/27 11:55:59 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:40:32 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class	Character: public ICharacter
 
 	public:
 		Character(void);
-		Character(const std::string& nm);
+		Character(const std::string nm);
 		Character(const Character &other);
 		~Character(void);
 		Character	&operator=(const Character &other);

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:11:16 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/27 11:46:57 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:20:00 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Dog::Dog(void): Animal()
 	std::cout << YELLOW << "Dog(Constructor default)\n" << RESET;
 }
 
-Dog::Dog(const Dog &other): Animal(other)
+Dog::Dog(const Dog &other): Animal(other), brain(NULL)
 {
 	std::cout << YELLOW << "Dog(constructor copy call)\n" << RESET;
 	*this = other;
@@ -27,7 +27,8 @@ Dog::Dog(const Dog &other): Animal(other)
 
 Dog::~Dog(void)
 {
-	delete brain;
+	if (brain)
+		delete brain;
 	std::cout << YELLOW << "Dog destroyed\n" << RESET;
 }
 
@@ -35,9 +36,9 @@ Dog &Dog::operator=(const Dog& other)
 {
 	if (this != &other)
 	{
-		delete brain;
-		brain = new Brain();
-		brain = other.brain;
+		if (brain)
+			delete brain;
+		brain = new Brain(*other.brain);
 		type = other.type;
 	}
 	return (*this);

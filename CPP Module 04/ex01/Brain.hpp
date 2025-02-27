@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:21:08 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 09:27:41 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:10:36 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Brain
 	public:
 		Brain(void);
 		Brain(const Brain& other);
-		virtual ~Brain(void);
+		~Brain(void);
 		Brain	&operator=(const Brain& other);
 };
 

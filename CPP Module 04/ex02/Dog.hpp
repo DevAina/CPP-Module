@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:11:29 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 14:13:09 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:50:43 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class	Dog: public Animal
 		Dog(const Dog &other);
 		~Dog(void);
 		Dog&	operator=(const Dog& other);
-		void makeSound(void) override;
+		void makeSound(void);
 };
 
 #endif

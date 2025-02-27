@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 15:58:55 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/10 09:02:33 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:48:46 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class	Cat: public Animal
 		Cat(const Cat &other);
 		~Cat(void);
 		Cat&	operator=(const Cat& other);
-		void makeSound(void) const override;
+		void makeSound(void) const;
 };
 
 #endif

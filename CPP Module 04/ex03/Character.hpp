@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:28:42 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/21 18:37:55 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:55:59 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ class	Character: public ICharacter
 		Character(const Character &other);
 		~Character(void);
 		Character	&operator=(const Character &other);
-		std::string const &getName() const override;
-		void	equip(AMateria *m) override;
-		void	unequip(int idx) override;
-		void	use(int idx, ICharacter& target) override;
+		std::string const &getName() const;
+		void	equip(AMateria *m);
+		void	unequip(int idx);
+		void	use(int idx, ICharacter& target);
 };
 
 #endif

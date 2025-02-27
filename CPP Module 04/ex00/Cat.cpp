@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:02:53 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/09 17:29:34 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/02/27 11:40:40 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Cat::Cat(void): Animal()
 	std::cout << RED << "Cat(Constructor default)\n" << RESET;
 }
 
-Cat::Cat(const Cat &other)
+Cat::Cat(const Cat &other): Animal(other)
 {
 	std::cout << RED << "Cat(constructor copy call)\n" << RESET;
 	type = other.type;

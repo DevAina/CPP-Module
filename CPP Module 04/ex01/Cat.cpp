@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 16:02:53 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/27 18:19:47 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:25:50 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ Cat &Cat::operator=(const Cat& other)
 	{
 		if (brain)
 			delete brain;
-		brain = new Brain();
-		brain = other.brain;
+		brain = new Brain(*other.brain);
 		type = other.type;
 	}
 	return (*this);

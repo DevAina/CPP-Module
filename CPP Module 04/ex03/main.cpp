@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:45:45 by trarijam          #+#    #+#             */
-/*   Updated: 2025/02/27 18:52:56 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:25:02 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
     return 0;
 }*/
 
-/*int main()
+int main()
 {
     std::cout << "=== Test 1 : Création de Materias ===" << std::endl;
     AMateria* ice = new Ice();
@@ -134,26 +134,4 @@
 
     std::cout << "Tous les tests ont été exécutés avec succès !" << std::endl;
     return (0);
-}*/
-
-int main()
-{
-    AMateria *ice = new Ice();
-    AMateria *cure = new Cure();
-
-    Character* Bob = new Character("BOb");
-    Bob->equip(ice);
-    Bob->equip(cure);
-    Bob->equip(ice);
-    Bob->equip(cure);
-
-    Bob->unequip(1);
-    Bob->unequip(3);
-
-    Character alice("Alice");
-    alice = *Bob;
-    delete Bob;
-    delete ice;
-    delete cure;
-
 }

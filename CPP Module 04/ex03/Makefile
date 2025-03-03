@@ -1,6 +1,6 @@
 NAME = InterfaceRecap
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra
 
 SRCS = main.cpp AMateria.cpp ICharacter.cpp IMateriaSource.cpp MateriaSource.cpp Character.cpp Cure.cpp Ice.cpp materiasol.cpp
 

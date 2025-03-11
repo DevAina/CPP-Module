@@ -6,13 +6,14 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:35:15 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/10 15:56:28 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:17:17 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include <cstring>
+#include "Form.hpp"
 #include <ostream>
+#include <iostream>
 
 Bureaucrat::Bureaucrat(): name("Incognito"), grade(150)
 {
@@ -60,6 +61,12 @@ void    Bureaucrat::decrementGrade(void)
     grade += 1;
     if (grade > 150) 
         throw Bureaucrat::GradeTooLowException("Grade is too low. Must be between 150 and 1.");
+}
+
+void    Bureaucrat::signForm(Form& form) const
+{
+    std::cout << "Adrress: " << this << " Name: " << name << std::endl;
+    form.beSigned(*this);
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string ms): mess(ms)

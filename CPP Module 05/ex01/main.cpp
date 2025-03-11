@@ -6,21 +6,23 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/10 14:37:51 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/11 10:32:14 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <iterator>
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 
 int main()
 {
     try
     {
-        Bureaucrat bureaucrat("Splinter", 150);
+        Form    form("Acte de vente", 149, 149);
+        Bureaucrat bureaucrat("Splinter", 148);
+        std::cout << form << std::endl;
         std::cout << bureaucrat << std::endl;
-        bureaucrat.decrementGrade();
+        bureaucrat.signForm(form);
     }
     catch (const Bureaucrat::GradeTooHighException& err)
     {

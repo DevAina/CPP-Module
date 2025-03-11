@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:19:40 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/10 18:45:57 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:23:35 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FORM_HPP
 
 # include <exception>
-# include <string.h>
+# include <ostream>
+# include <string>
 
 class Bureaucrat;
 
@@ -28,7 +29,7 @@ class Form
 
     public:
         Form();
-        Form(const std::string name, const int gradeSign, constint gradeExecute);
+        Form(const std::string name, const int gradeSign, const int gradeExecute);
         Form(const Form& other);
         ~Form();
         Form    &operator=(const Form& other);
@@ -36,10 +37,10 @@ class Form
         /************Getters***********/
         const std::string   getName(void) const;
         bool    getIsSigned(void) const;
-        const int   getGradeToSign(void) const;
-        const int   getGradeToExecute(void) const;
+        int     getGradeToSign(void) const;
+        int     getGradeToExecute(void) const;
 
-        void    beSigned(const Bureaucrat);
+        void    beSigned(const Bureaucrat& bureaucrat);
 
         class GradeTooHighException: public std::exception
         {
@@ -63,5 +64,7 @@ class Form
                 const char*   what() const throw();
         };
 };
+
+std::ostream    &operator<<(std::ostream& o, const Form& form);
 
 #endif

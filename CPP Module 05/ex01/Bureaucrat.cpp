@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:35:15 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/11 11:17:17 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:50:51 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,16 @@ void    Bureaucrat::decrementGrade(void)
 
 void    Bureaucrat::signForm(Form& form) const
 {
-    std::cout << "Adrress: " << this << " Name: " << name << std::endl;
-    form.beSigned(*this);
+    try
+    {
+        form.beSigned(*this);
+        std::cout << "\033[35mBureaucrat " << name << " signed form " << form.getName() << "\033[0m" << std::endl;
+    }
+    catch (const Form::GradeTooLowException& err)
+    {
+        std::cout << "\033[31mBureaucrat " << name
+            << " couldn't sign form" << form.getName() << " " << err.what() << std::endl;
+    }
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string ms): mess(ms)

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 18:46:15 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/11 11:23:20 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:31:15 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,10 @@ int   Form::getGradeToExecute() const
 
 void    Form::beSigned(const Bureaucrat& bureaucrat)
 {
-    std::cout << "Bureaucrat " << &bureaucrat << std::endl;
-    std::cout << "Grade to sign " << gradeToSign << std::endl;
     if (bureaucrat.getGrade() > gradeToSign)
         throw Form::GradeTooLowException("\033[1;31mGrade required to sign is too low.\033[0m");
     if (bureaucrat.getGrade() <= gradeToSign && !isSigned)
-    {
         isSigned = true;
-        std::cout << "\033[32mBureaucrat [" << bureaucrat.getName() << "] signed form [" << name << "] \033[0m\n";
-    }
 }
 
 Form::GradeTooLowException::GradeTooLowException(const std::string mess): message(mess)

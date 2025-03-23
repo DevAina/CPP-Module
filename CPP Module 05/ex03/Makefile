@@ -1,6 +1,8 @@
 NAME = Intern
 
-FLAGS = -Wall -Werror -Wextra -g -std=c++98
+CXX = c++
+
+FLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp Bureaucrat.cpp AForm.cpp  ShrubberyCreationForm.cpp \
 	   RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
@@ -11,10 +13,10 @@ all : ${NAME}
 
 %.o : %.cpp
 	@echo "\033[33mCompiling $< ...\033[0m"
-	@${CC} -c ${FLAGS} $< -o $@
+	@${CXX} -c ${FLAGS} $< -o $@
 
 ${NAME}: ${OBJS}
-	@c++ ${FLAGS} ${OBJS} -o ${NAME}
+	@${CXX} ${FLAGS} ${OBJS} -o ${NAME}
 	@echo "\033[36m${NAME} has been succesfully built!\033[0m"
 
 clean:

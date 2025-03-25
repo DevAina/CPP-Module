@@ -6,16 +6,25 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:35:17 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/23 15:17:35 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/25 11:08:41 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <ctype.h>
+#include <cctype>
+#include <cfloat>
+#include <cstdlib>
+#include <climits>
+#include <cstring>
 #include <iostream>
+#include <iterator>
 #include <ostream>
-#include <stdexcept>
-#include <string>
+
+static  void    SkipDigits(std::string::const_iterator& it, std::string const& literal)
+{
+    while (it != literal.end() && isdigit(*it))
+        ++it;
+}
 
 bool    ScalarConverter::LiteralIsChar(std::string const& literal)
 {
@@ -24,57 +33,155 @@ bool    ScalarConverter::LiteralIsChar(std::string const& literal)
 
 bool    ScalarConverter::LiteralIsInt(std::string const & literal)
 {
-    try
+    if (literal.empty())
+       return (false);
+    std::string::const_iterator   it = literal.begin();
+    if (*it == '+' || *it == '-')
+        *it++;
+    for ( ; it != literal.end(); it++)
     {
-        std::stoi(literal);
-        return (true);
+        if (!isdigit(*it))
+            return (false);
     }
-    catch (const std::invalid_argument & e)
+    return (true);
+}
+
+void    ScalarConverter::PrintCharConversion(int c)
+{
+   if (!isascii(c))
+       std::cout << "char: impossible"  << std::endl;
+   else if (isprint(c))
+       std::cout << "char: " << static_cast<char>(c) << std::endl;
+   else
+        std::cout << "char: Non displayable" << std::endl;
+}
+
+void    ScalarConverter::PrintConversion(double value, std::string const& literal)
+{
+    long longValue;
+    float   f;
+
+    //Char
+    ScalarConverter::PrintCharConversion(static_cast<int>(value));
+    
+    //int
+    longValue = static_cast<long>(value);
+    if (longValue > INT_MAX || longValue < INT_MIN)
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout << "int: " << static_cast<int>(value) << std::endl;
+    
+    //float
+    f = static_cast<float>(value);
+    std::cout << "float: " << f;
+    if (f == longValue)
     {
+        if (literal.length() != 7)
+            std::cout << ".0f" << std::endl;
+        else
+            std::cout << "f" << std::endl;
+    }
+    else
+        std::cout << "f" << std::endl;
+
+    //double
+    std::cout << "double: " << value;
+    if (value == longValue)
+    {
+        if (literal.length() != 7)
+            std::cout << ".0" << std::endl;
+        else
+            std::cout << std::endl;
+    }
+    else
+        std::cout << std::endl;
+}
+
+bool    ScalarConverter::LiteralIsFloat(std::string const & literal)
+{
+    if (literal.empty())
         return (false);
-    }
-    catch (const std::out_of_range & e)
-    {
+    std::string::const_iterator it = literal.begin();
+    
+    if (*it == '+' || *it == '-')
+        *it++;
+        
+    if (!isdigit(*it))
         return (false);
-    }
+   
+    SkipDigits(it, literal);
+
+    if (*it != '.')
+        return (false);
+        
+    it++;
+    if (!isdigit(*it))
+        return (false);
+ 
+    SkipDigits(it, literal);
+
+    if (*it != 'f')
+        return (false);
+    it++;
+    if (it != literal.end())
+        return (false);
+
+    return (true);
+}
+
+bool    ScalarConverter::LiteralIsDouble(std::string const &literal)
+{
+    std::string::const_iterator it;
+
+    if (literal.empty())
+        return (false);
+
+    it = literal.begin();
+    if (*it == '+' || *it == '-')
+        *it++;
+
+    if (!isdigit(*it))
+        return (false);
+
+    SkipDigits(it, literal);
+
+    if (*it != '.')
+        return (false);
+
+    *it++;
+    if (!isdigit(*it))
+        return (false);
+
+    SkipDigits(it, literal);
+    if (*it == 'F')
+        return (false);
+    return (true);
 }
 
 void    ScalarConverter::convert(std::string const literal)
 {
     char    c;
-    int     i;
     float   f;
     float   d;
 
-    if (ScalarConverter::LiteralIsChar(literal))
+    if (ScalarConverter::LiteralIsInt(literal))
+    {
+        long l = atol(literal.c_str());
+        ScalarConverter::PrintConversion(static_cast<double>(l), literal);
+   }
+    else if (ScalarConverter::LiteralIsChar(literal))
     { 
         c = literal[0];
-        i = static_cast<int>(c);
-        f = static_cast<float>(i);
-        d = static_cast<double>(f); 
-        std::cout << "char: " << c << std::endl;
-        std::cout << "int: " << i << std::endl;
-        std::cout << "float: " << f << ".0f" << std::endl;
-        std::cout << "double: " << d << ".0" <<std::endl;
+        ScalarConverter::PrintConversion(static_cast<double>(c), literal);
     }
-    else if (ScalarConverter.LiteralIsInt(literal))
+    else if (ScalarConverter::LiteralIsFloat(literal))
     {
-        i = std::stoi(literal);
-        f = static_cast<float>(i);
-        d = static_cast<double>(f);
-        if (literal.length() == 1)
-        {
-            if (isprint(i))
-                std::cout << "char: " << static_cast<char>(i) << std::endl;
-            else
-                std::cout << "char: Non displayable" << std::endl;
-        }
-        else
-        {
-            std::cout << "char: impossible" << std::endl;
-        }
-        std::cout << "int: " << i << std::endl;
-        std::cout << "float: " << f << ".0f" << std::endl;
-        std::cout << "double: " << d << ".0" <<std::endl;
+        f = (float)atof(literal.c_str());
+        ScalarConverter::PrintConversion(static_cast<double>(f), literal);
+   }
+    else if (ScalarConverter::LiteralIsDouble(literal))
+    {
+        d = atof(literal.c_str());
+        ScalarConverter::PrintConversion(d, literal);
     }
 }

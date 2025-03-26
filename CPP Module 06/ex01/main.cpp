@@ -6,12 +6,15 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 08:19:15 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/26 08:36:16 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:11:22 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
 #include <iostream>
+
+#define RESET   "\033[0m"
+#define BOLD    "\033[1;15m"
 
 int	main()
 {
@@ -28,6 +31,8 @@ int	main()
 	else
 		std::cout << "Cast Fail" << std::endl;
 
-	std::cout << "name cast: " << cast->name << std::endl;
+	std::cout << BOLD;
+	PrintData(data);
+	std::cout << RESET;
 	return (0);
 }

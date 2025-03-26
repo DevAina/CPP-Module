@@ -1,10 +1,10 @@
-NAME = Serializer
+NAME = IdentifyRealType
 
 CXX = c++
 
 FLAGS = -Wall -Werror -Wextra -std=c++98
 
-SRCS = main.cpp Serializer.cpp Data.cpp
+SRCS = main.cpp Base.cpp A.cpp B.cpp C.cpp IdentifyRealType.cpp 
 
 OBJS = ${SRCS:.cpp=.o}
 

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/13 11:31:34 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:13:37 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int main()
 {
     Bureaucrat   bob("Bob", 5);
     Intern intern;
-    AForm   *form;
+    AForm   *form = NULL;
 
     try
     {
-        form = intern.makeForm("ShrubberyCreationForm", "home");
+        form = intern.makeForm("hrubberyCreationForm", "home");
         bob.signForm(*form);
         bob.executeForm(*form);
     }

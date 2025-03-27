@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 08:19:15 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/26 11:11:22 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/27 07:19:39 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	main()
 		std::cout << "Cast Fail" << std::endl;
 
 	std::cout << BOLD;
-	PrintData(data);
+	if (cast != NULL)
+		PrintData(*cast);
 	std::cout << RESET;
 	return (0);
 }

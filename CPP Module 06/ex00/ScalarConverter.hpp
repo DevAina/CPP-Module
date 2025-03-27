@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:15:32 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/25 10:58:17 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/27 07:12:29 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SCALARCONVERTER_HPP
 
 # include <string>
-# include <iomanip>
 
 class ScalarConverter
 {

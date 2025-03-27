@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:14:04 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/26 15:07:38 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/27 07:39:23 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 #include <iostream>
 #include <ostream>
 #include <typeinfo>
+
+#define PURPLE_BOLD "\033[1;35m"
+#define YELLOW_BOLD "\033[1;33m"
+#define RESET "\033[0m"
 
 Base*   generate(void)
 {
@@ -40,62 +44,59 @@ Base*   generate(void)
     return (new C());
 }
 
-void    identify(Base* p)
+void identify(Base* p)
 {
-    A*  downcastedA = dynamic_cast<A*>(p);
-    B*  downcastedB = dynamic_cast<B*>(p);
-    C*  downcastedC = dynamic_cast<C*>(p);
-    if (downcastedA != NULL)
+    A* downcastedA = dynamic_cast<A*>(p);
+    B* downcastedB = dynamic_cast<B*>(p);
+    C* downcastedC = dynamic_cast<C*>(p);
+    
+    std::cout << "=======================================" << std::endl;
+    if (downcastedA)
     {
-        std::cout << "p is A" << std::endl;
-        return;
+        std::cout << PURPLE_BOLD << "=====   Object type: A   =====" << RESET << std::endl;
     }
-    else if (downcastedB != NULL)
+    else if (downcastedB)
     {
-        std::cout << "p is B" << std::endl;
-        return ;
+        std::cout << YELLOW_BOLD << "=====   Object type: B   =====" << RESET << std::endl;
     }
-    else if (downcastedC != NULL)
+    else if (downcastedC)
     {
-        std::cout << "p is C" << std::endl;
-        return;
+        std::cout << PURPLE_BOLD << "=====   Object type: C   =====" << RESET << std::endl;
     }
-    std::cout << "error pointer" << std::endl;
+    else
+    {
+        std::cout << "=====   Unknown object type   =====" << std::endl;
+    }
+    std::cout << "=======================================" << std::endl;
 }
 
-void    identify(Base& ref)
+void identify(Base& ref)
 {
-    //A
+    std::cout << "=======================================" << std::endl;
+    
     try
     {
-        A &downcastedA = dynamic_cast<A&>(ref);
-        (void)downcastedA;
-        std::cout << "ref is A" << std::endl;
+        A& a = dynamic_cast<A&>(ref);
+        (void)a;
+        std::cout << PURPLE_BOLD << "=====   Object type: A   =====" << RESET << std::endl;
     }
-    catch (std::bad_cast const & err)
-    {
-    }
-
-    //B
+    catch(const std::bad_cast&) {}
+    
     try
     {
-        B &downcastedB = dynamic_cast<B&>(ref);
-        (void)downcastedB;
-        std::cout << "ref is B" << std::endl;
+        B& b = dynamic_cast<B&>(ref);
+        (void)b;
+        std::cout << YELLOW_BOLD << "=====   Object type: B   =====" << RESET << std::endl;
     }
-    catch (std::bad_cast const & err)
-    {
-    }
-
-    //C
+    catch(const std::bad_cast&) {}
+    
     try
     {
-        C &downcastedC = dynamic_cast<C&>(ref);
-        (void)downcastedC;
-        std::cout << "ref is C" << std::endl;
+        C& c = dynamic_cast<C&>(ref);
+        (void)c;
+        std::cout << PURPLE_BOLD << "=====   Object type: C   =====" << RESET << std::endl;
     }
-    catch (std::bad_cast const &err)
-    {
-    }
-
+    catch(const std::bad_cast&) {}
+    
+    std::cout << "=======================================" << std::endl;
 }

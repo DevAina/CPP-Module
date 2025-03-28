@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:35:17 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/25 11:08:41 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:56:36 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void    ScalarConverter::PrintConversion(double value, std::string const& litera
     std::cout << "float: " << f;
     if (f == longValue)
     {
-        if (literal.length() != 7)
+        if (literal.length() < 7)
             std::cout << ".0f" << std::endl;
         else
             std::cout << "f" << std::endl;
@@ -88,7 +88,7 @@ void    ScalarConverter::PrintConversion(double value, std::string const& litera
     std::cout << "double: " << value;
     if (value == longValue)
     {
-        if (literal.length() != 7)
+        if (literal.length() < 7)
             std::cout << ".0" << std::endl;
         else
             std::cout << std::endl;
@@ -160,18 +160,26 @@ bool    ScalarConverter::LiteralIsDouble(std::string const &literal)
 
 void    ScalarConverter::convert(std::string const literal)
 {
+    long    l;
+    int     i;
     char    c;
     float   f;
     float   d;
 
     if (ScalarConverter::LiteralIsInt(literal))
     {
-        long l = atol(literal.c_str());
-        ScalarConverter::PrintConversion(static_cast<double>(l), literal);
-   }
+        l = atol(literal.c_str());
+        if (l > INT_MAX || l < INT_MIN)
+            ScalarConverter::PrintConversion(static_cast<double>(l), literal);
+        else
+        {
+            i = atoi(literal.c_str());
+            ScalarConverter::PrintConversion(static_cast<double>(i), literal);
+        }
+    }
     else if (ScalarConverter::LiteralIsChar(literal))
     { 
-        c = literal[0];
+        c = static_cast<char>(literal[0]);
         ScalarConverter::PrintConversion(static_cast<double>(c), literal);
     }
     else if (ScalarConverter::LiteralIsFloat(literal))

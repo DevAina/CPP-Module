@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 13:44:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/26 11:13:37 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/03/27 14:57:00 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,25 @@ int main()
 {
     Bureaucrat   bob("Bob", 5);
     Intern intern;
-    AForm   *form = NULL;
+    AForm   *form;
 
+    std::cout << "=================Test with correct Form=============" << std::endl;
     try
     {
-        form = intern.makeForm("hrubberyCreationForm", "home");
+        form = intern.makeForm("ShrubberyCreationForm", "home");
         bob.signForm(*form);
         bob.executeForm(*form);
+        delete form;
+    }
+    catch (const Intern::InternException& err)
+    {
+        std::cout << err.what() << std::endl;
+    }
+
+    std::cout << "=================Test with incorrect Form ===================\n";
+    try
+    {
+        form = intern.makeForm("Form", "njewf");
     }
     catch (const Intern::InternException& err)
     {

@@ -2,7 +2,7 @@ NAME = BureaucratForm
 
 CXX = c++
 
-FLAGS = -Wall -Werror -Wextra -g -std=c++98
+FLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp Bureaucrat.cpp AForm.cpp  ShrubberyCreationForm.cpp \
 	   RobotomyRequestForm.cpp PresidentialPardonForm.cpp
@@ -13,7 +13,7 @@ all : ${NAME}
 
 %.o : %.cpp
 	@echo "\033[33mCompiling $< ...\033[0m"
-	@${CXX} -c ${FLAGS} $< -o $@
+	@${CXX} ${FLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
 	@${CXX} ${FLAGS} ${OBJS} -o ${NAME}

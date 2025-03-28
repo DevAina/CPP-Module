@@ -13,7 +13,7 @@ all : ${NAME}
 
 %.o : %.cpp
 	@echo "\033[33mCompiling $< ...\033[0m"
-	@${CXX} -c ${FLAGS} $< -o $@
+	@${CXX} ${FLAGS} -c $< -o $@
 
 ${NAME}: ${OBJS}
 	@${CXX} ${FLAGS} ${OBJS} -o ${NAME}

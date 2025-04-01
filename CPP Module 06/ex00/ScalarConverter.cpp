@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:35:17 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/28 12:56:36 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:07:46 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,21 @@
 #include <iterator>
 #include <ostream>
 
+
+
+
 static  void    SkipDigits(std::string::const_iterator& it, std::string const& literal)
 {
     while (it != literal.end() && isdigit(*it))
         ++it;
 }
 
-bool    ScalarConverter::LiteralIsChar(std::string const& literal)
+static bool    LiteralIsChar(std::string const& literal)
 {
     return (literal.length() == 1 && isprint(literal[0]));
 }
 
-bool    ScalarConverter::LiteralIsInt(std::string const & literal)
+static bool    LiteralIsInt(std::string const & literal)
 {
     if (literal.empty())
        return (false);
@@ -46,7 +49,15 @@ bool    ScalarConverter::LiteralIsInt(std::string const & literal)
     return (true);
 }
 
-void    ScalarConverter::PrintCharConversion(int c)
+static void PrinctConversionError(void)
+{
+    std::cout << "int: impossible" << std::endl;
+    std::cout << "char: impossible" << std::endl;
+    std::cout << "float: impossible" << std::endl;
+    std::cout << "double: impossible" << std::endl;
+}
+
+static void    PrintCharConversion(int c)
 {
    if (!isascii(c))
        std::cout << "char: impossible"  << std::endl;
@@ -56,13 +67,13 @@ void    ScalarConverter::PrintCharConversion(int c)
         std::cout << "char: Non displayable" << std::endl;
 }
 
-void    ScalarConverter::PrintConversion(double value, std::string const& literal)
+static void    PrintConversion(double value, std::string const& literal)
 {
     long longValue;
     float   f;
 
     //Char
-    ScalarConverter::PrintCharConversion(static_cast<int>(value));
+    PrintCharConversion(static_cast<int>(value));
     
     //int
     longValue = static_cast<long>(value);
@@ -97,7 +108,7 @@ void    ScalarConverter::PrintConversion(double value, std::string const& litera
         std::cout << std::endl;
 }
 
-bool    ScalarConverter::LiteralIsFloat(std::string const & literal)
+static bool    LiteralIsFloat(std::string const & literal)
 {
     if (literal.empty())
         return (false);
@@ -129,7 +140,7 @@ bool    ScalarConverter::LiteralIsFloat(std::string const & literal)
     return (true);
 }
 
-bool    ScalarConverter::LiteralIsDouble(std::string const &literal)
+static bool    LiteralIsDouble(std::string const &literal)
 {
     std::string::const_iterator it;
 
@@ -158,6 +169,21 @@ bool    ScalarConverter::LiteralIsDouble(std::string const &literal)
     return (true);
 }
 
+ScalarConverter::ScalarConverter() {}
+
+ScalarConverter::ScalarConverter(const ScalarConverter& other)
+{
+    (void)other;
+}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter& other)
+{
+    (void)other;
+    return (*this);
+}
+
+ScalarConverter::~ScalarConverter() {}
+
 void    ScalarConverter::convert(std::string const literal)
 {
     long    l;
@@ -166,30 +192,32 @@ void    ScalarConverter::convert(std::string const literal)
     float   f;
     float   d;
 
-    if (ScalarConverter::LiteralIsInt(literal))
+    if (LiteralIsInt(literal))
     {
         l = atol(literal.c_str());
         if (l > INT_MAX || l < INT_MIN)
-            ScalarConverter::PrintConversion(static_cast<double>(l), literal);
+            PrintConversion(static_cast<double>(l), literal);
         else
         {
             i = atoi(literal.c_str());
-            ScalarConverter::PrintConversion(static_cast<double>(i), literal);
+            PrintConversion(static_cast<double>(i), literal);
         }
     }
-    else if (ScalarConverter::LiteralIsChar(literal))
+    else if (LiteralIsChar(literal))
     { 
         c = static_cast<char>(literal[0]);
-        ScalarConverter::PrintConversion(static_cast<double>(c), literal);
+        PrintConversion(static_cast<double>(c), literal);
     }
-    else if (ScalarConverter::LiteralIsFloat(literal))
+    else if (LiteralIsFloat(literal))
     {
         f = (float)atof(literal.c_str());
-        ScalarConverter::PrintConversion(static_cast<double>(f), literal);
+        PrintConversion(static_cast<double>(f), literal);
    }
-    else if (ScalarConverter::LiteralIsDouble(literal))
+    else if (LiteralIsDouble(literal))
     {
         d = atof(literal.c_str());
-        ScalarConverter::PrintConversion(d, literal);
+        PrintConversion(d, literal);
     }
+    else
+        PrinctConversionError();
 }

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:15:32 by trarijam          #+#    #+#             */
-/*   Updated: 2025/03/25 10:58:17 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:26:17 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,10 @@ class ScalarConverter
     private:
         ScalarConverter();
         ScalarConverter(const ScalarConverter& other);
-        ~ScalarConverter();
         ScalarConverter &operator=(const ScalarConverter& other);
-        static void    PrintCharConversion(int c);
-        static void    PrintConversion(double value, std::string const & literal);
 
     public:
-        static bool    LiteralIsChar(std::string const& literal);
-        static bool    LiteralIsInt(std::string const& literal);
-        static bool    LiteralIsFloat(std::string const& literal);
-        static bool    LiteralIsDouble(std::string const& literal);
-        static bool    LiteralIsSpecial(std::string const& literal);
+        ~ScalarConverter();
         static void     convert(std::string const literal);
 };
 

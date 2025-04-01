@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:35:17 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/01 10:07:46 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:52:00 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@
 #include <iostream>
 #include <iterator>
 #include <ostream>
-
-
-
+#include <limits>
 
 static  void    SkipDigits(std::string::const_iterator& it, std::string const& literal)
 {
@@ -67,7 +65,7 @@ static void    PrintCharConversion(int c)
         std::cout << "char: Non displayable" << std::endl;
 }
 
-static void    PrintConversion(double value, std::string const& literal)
+static void    PrintConversion(long double value, std::string const& literal)
 {
     long longValue;
     float   f;
@@ -84,28 +82,38 @@ static void    PrintConversion(double value, std::string const& literal)
     
     //float
     f = static_cast<float>(value);
-    std::cout << "float: " << f;
-    if (f == longValue)
+    if (value <= FLT_MAX && value >= FLT_MIN)
     {
-        if (literal.length() < 7)
-            std::cout << ".0f" << std::endl;
+        std::cout << "float: " << f;
+        if (f == longValue)
+        {
+            if (literal.length() < 7)
+                std::cout << ".0f" << std::endl;
+            else
+                std::cout << "f" << std::endl;
+        }
         else
             std::cout << "f" << std::endl;
     }
     else
-        std::cout << "f" << std::endl;
+        std::cout << "float: impossible" << std::endl;
 
     //double
-    std::cout << "double: " << value;
-    if (value == longValue)
+    if (value <= DBL_MAX && value >= DBL_MIN)
     {
-        if (literal.length() < 7)
-            std::cout << ".0" << std::endl;
+        std::cout << "double: ";
+        if (value == longValue)
+        {
+            if (literal.length() < 7)
+                std::cout << ".0" << std::endl;
+            else
+                std::cout << std::endl;
+        }
         else
             std::cout << std::endl;
     }
     else
-        std::cout << std::endl;
+        std::cout << "double: impossible" << std::endl;
 }
 
 static bool    LiteralIsFloat(std::string const & literal)
@@ -191,32 +199,39 @@ void    ScalarConverter::convert(std::string const literal)
     char    c;
     float   f;
     float   d;
+    long double ld;
 
     if (LiteralIsInt(literal))
     {
         l = atol(literal.c_str());
         if (l > INT_MAX || l < INT_MIN)
-            PrintConversion(static_cast<double>(l), literal);
+            PrintConversion(static_cast<long double>(l), literal);
         else
         {
             i = atoi(literal.c_str());
-            PrintConversion(static_cast<double>(i), literal);
+            PrintConversion(static_cast<long double>(i), literal);
         }
     }
     else if (LiteralIsChar(literal))
     { 
         c = static_cast<char>(literal[0]);
-        PrintConversion(static_cast<double>(c), literal);
+        PrintConversion(static_cast<long double>(c), literal);
     }
     else if (LiteralIsFloat(literal))
     {
         f = (float)atof(literal.c_str());
-        PrintConversion(static_cast<double>(f), literal);
+        PrintConversion(static_cast<long double>(f), literal);
    }
     else if (LiteralIsDouble(literal))
     {
-        d = atof(literal.c_str());
-        PrintConversion(d, literal);
+        ld = strtold(literal.c_str(), NULL);
+        if (ld > DBL_MAX || ld < DBL_MIN)
+            PrintConversion(ld, literal);
+        else
+        {
+            d = atof(literal.c_str());
+            PrintConversion(static_cast<long double>(d), literal);
+        }
     }
     else
         PrinctConversionError();

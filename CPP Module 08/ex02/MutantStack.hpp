@@ -6,17 +6,18 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:02:36 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/06 19:35:25 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/07 14:21:45 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MUTANTSTACK_HPP
 # define MUTANTSTACK_HPP
 
+#include <deque>
 # include <list>
 # include <stack>
 
-template <typename T, typename Container = std::list<T> >
+template <typename T, typename Container = std::deque<T> >
 class MutantStack: public std::stack<T, Container>
 {
 	public:
@@ -62,6 +63,5 @@ class MutantStack: public std::stack<T, Container>
 			return (this->c.cend());
 		}
 };
-
 
 #endif

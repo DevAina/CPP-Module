@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:35:17 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/02 14:51:27 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/09 13:39:43 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static  void    SkipDigits(std::string::const_iterator& it, std::string const& l
     while (it != literal.end() && isdigit(*it))
         ++it;
 }
+
+static bool LiteralIsSpecial(std::string const& literal)
+{
+    return (literal == "-inff" || literal == "+inff" || literal == "nanf"
+            || literal == "-inf" || literal == "+inf" || literal == "nan");
+}
+
 
 static bool    LiteralIsChar(std::string const& literal)
 {
@@ -162,7 +169,11 @@ static bool    LiteralIsDouble(std::string const &literal)
         return (false);
 
     SkipDigits(it, literal);
-    if (*it == 'F')
+    if (*it != 'F')
+        return (false);
+
+    it++;
+    if (it != literal.end())
         return (false);
     return (true);
 }
@@ -214,7 +225,12 @@ void    ScalarConverter::convert(std::string const literal)
     else if (LiteralIsDouble(literal))
     {
         d = atof(literal.c_str());
-        PrintConversion(static_cast<long double>(d), literal);
+        PrintConversion(d, literal);
+    }
+    else if (LiteralIsSpecial(literal))
+    {
+        d = atof(literal.c_str());
+        PrintConversion(d, literal);
     }
     else
         PrinctConversionError();

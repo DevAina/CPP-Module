@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:02:36 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/07 14:21:45 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/11 12:37:23 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define MUTANTSTACK_HPP
 
 #include <deque>
-# include <list>
 # include <stack>
 
 template <typename T, typename Container = std::deque<T> >
 class MutantStack: public std::stack<T, Container>
 {
 	public:
+		typedef typename Container::reverse_iterator reverse_iterator;
+		typedef typename Container::const_reverse_iterator const_reverse_iterator;
 		typedef typename Container::iterator iterator;
 		typedef typename Container::const_iterator const_iterator;
 		MutantStack()
@@ -61,6 +62,28 @@ class MutantStack: public std::stack<T, Container>
 		const_iterator	cend() const
 		{
 			return (this->c.cend());
+		}
+
+		/*****************resverse iterator********************/
+		reverse_iterator	rbegin()
+		{
+			return (this->c.rbegin());
+		}
+
+		reverse_iterator	rend()
+		{
+			return (this->c.rend());
+		}
+
+		/********************const reverse iterarator***************/
+		const_reverse_iterator	rbegin() const
+		{
+			return (this->c.crbegin());
+		}
+
+		const_reverse_iterator	rend() const
+		{
+			return (this->c.crend());
 		}
 };
 

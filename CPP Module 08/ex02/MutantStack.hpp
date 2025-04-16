@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:02:36 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/15 10:16:08 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/16 11:02:48 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,67 +24,32 @@ class MutantStack: public std::stack<T, Container>
 		typedef typename Container::const_reverse_iterator const_reverse_iterator;
 		typedef typename Container::iterator iterator;
 		typedef typename Container::const_iterator const_iterator;
-		MutantStack()
-		{
-		}
-
-		MutantStack(const MutantStack& other): std::stack<T, Container>(other)
-		{
-		}
-
-		~MutantStack()
-		{
-		}
-
-		MutantStack	&operator=(const MutantStack& other)
-		{
-			std::stack<T, Container>::operator=(other);
-			return (*this);
-		}
+		MutantStack();
+		MutantStack(const MutantStack& other);
+		~MutantStack();
+		MutantStack	&operator=(const MutantStack& other);
 
 		/***iterator**/
-		iterator begin()
-		{
-			return (this->c.begin());
-		}
+		iterator begin();
 
-		iterator	end()
-		{
-			return (this->c.end());
-		}
+		iterator	end();
 
 		/*******Const iterator*************/
-		const_iterator	cbegin() const
-		{
-			return (this->c.cbegin());
-		}
+		const_iterator	cbegin() const;
 
-		const_iterator	cend() const
-		{
-			return (this->c.cend());
-		}
+		const_iterator	cend() const;
 
 		/*****************resverse iterator********************/
-		reverse_iterator	rbegin()
-		{
-			return (this->c.rbegin());
-		}
+		reverse_iterator	rbegin();
 
-		reverse_iterator	rend()
-		{
-			return (this->c.rend());
-		}
+		reverse_iterator	rend();
 
 		/********************const reverse iterarator***************/
-		const_reverse_iterator	rbegin() const
-		{
-			return (this->c.crbegin());
-		}
+		const_reverse_iterator	crbegin() const;
 
-		const_reverse_iterator	rend() const
-		{
-			return (this->c.crend());
-		}
+		const_reverse_iterator	crend() const;
 };
+
+# include "MutantStack.tpp"
 
 #endif

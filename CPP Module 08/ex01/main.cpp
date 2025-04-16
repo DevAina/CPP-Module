@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 13:59:48 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/16 09:13:22 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:44:39 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main()
     std::cout << "\033[1;21;7m===== Basic Tests =====\033[0m" << std::endl;
     try
 	{
-        Span sp(5);
+        Span sp(-5);
         sp.addNumber(6);
         sp.addNumber(3);
         sp.addNumber(17);

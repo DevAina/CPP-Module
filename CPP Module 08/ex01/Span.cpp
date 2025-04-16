@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 12:06:51 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/16 10:28:26 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:46:52 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ Span::Span(): N(2000)
 
 Span::Span(unsigned int n): N(n)
 {
+	if (static_cast<int>(n) < 0)
+		throw std::invalid_argument("\e[1;31mArgument must be positif\e[0m");
 }
 
 Span::Span(const Span& other)

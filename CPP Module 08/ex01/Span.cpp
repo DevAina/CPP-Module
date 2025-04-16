@@ -6,13 +6,15 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 12:06:51 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/06 17:44:37 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:28:26 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <algorithm>
+#include <iterator>
 #include <stdexcept>
+#include <vector>
 
 Span::Span(): N(2000)
 {
@@ -74,4 +76,11 @@ unsigned int	Span::longestSpan() const
 	std::sort(tmp.begin(), tmp.end());
 	maxDiff = tmp[container.size() - 1] - tmp[0];
 	return (maxDiff);
+}
+
+void	Span::fill(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	if ((size_t)std::distance(begin, end) < N - container.size())
+		throw std::out_of_range("\e[31;1mLen out of range\n");
+	container.assign(begin, end);
 }

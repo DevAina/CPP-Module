@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 19:02:36 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/11 12:37:23 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:16:08 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

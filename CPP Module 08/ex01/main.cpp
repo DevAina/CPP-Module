@@ -6,12 +6,13 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 13:59:48 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/06 17:58:23 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:13:22 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cstdlib>
+#include <vector>
 #include "Span.hpp"
 
 int main()
@@ -37,9 +38,12 @@ int main()
     std::cout << "\n\033[1;21;7m===== Large Dataset Test (10,000 numbers) =====\033[0m" << std::endl;
     try
 	{
-        Span bigSpan(10000);
+        std::vector<int> numbers;
         for (int i = 0; i < 10000; ++i)
-            bigSpan.addNumber(rand());
+            numbers.push_back(rand() % 10000 + 1);
+
+        Span bigSpan(10000);
+        bigSpan.fill(numbers.begin(), numbers.end());
 
         std::cout << "Shortest span: " << bigSpan.shortestSpan() << std::endl;
         std::cout << "Longest span: " << bigSpan.longestSpan() << std::endl;

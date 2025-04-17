@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:35:17 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/09 13:39:43 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:01:39 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,10 +169,6 @@ static bool    LiteralIsDouble(std::string const &literal)
         return (false);
 
     SkipDigits(it, literal);
-    if (*it != 'F')
-        return (false);
-
-    it++;
     if (it != literal.end())
         return (false);
     return (true);

@@ -6,10 +6,11 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 13:59:48 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/16 10:44:39 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:03:20 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <exception>
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -125,6 +126,26 @@ int main()
 	catch (const std::exception& e)
 	{
         std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    std::cout << "\n==== Test copy constructor assignement ==== \n";
+    try
+    {
+        std::vector<int> vect;
+        for (int i = 0; i < 30; i += 5)
+            vect.push_back(i);
+        Span    org(10);
+
+        org.fill(vect.begin(), vect.end());
+        Span cpy(org);
+        const std::vector<int> cont = cpy.getContainer();
+        for (std::vector<int>::const_iterator it = cont.begin(); it != cont.end(); it++)
+            std::cout << "[" << *it << "]";
+        std::cout << std::endl;
+    }
+    catch (const std::exception& err)
+    {
+        std::cerr << err.what() << std::endl;
     }
     return 0;
 }

@@ -6,12 +6,13 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 12:06:51 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/16 10:46:52 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:02:41 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <algorithm>
+#include <iostream>
 #include <iterator>
 #include <stdexcept>
 #include <vector>
@@ -38,7 +39,12 @@ Span::~Span()
 Span	&Span::operator=(const Span& other)
 {
 	if (this != &other)
+	{
 		N = other.N;
+		container.clear();
+		for (unsigned int i = 0; i < other.container.size() ; i++)
+			container.push_back(other.container[i]);
+	}
 	return (*this);
 }
 
@@ -82,7 +88,12 @@ unsigned int	Span::longestSpan() const
 
 void	Span::fill(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	if ((size_t)std::distance(begin, end) < N - container.size())
+	if ((size_t)std::distance(begin, end) > N - container.size())
 		throw std::out_of_range("\e[31;1mLen out of range\n");
-	container.assign(begin, end);
+	container.insert(container.end(), begin, end);
+}
+
+const std::vector<int>&	Span::getContainer() const
+{
+	return (container);
 }

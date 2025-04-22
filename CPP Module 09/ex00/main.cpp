@@ -5,42 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 11:21:14 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/18 15:47:30 by trarijam         ###   ########.fr       */
+/*   Created: 2025/04/22 11:07:37 by trarijam          #+#    #+#             */
+/*   Updated: 2025/04/22 14:27:31 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.hpp"
+#include <fstream>
 #include <iostream>
+#include <string>
 
 int main(int argc, char **argv)
 {
-    int result;
+    (void)argv;
+    std::string     line;
+    std::ifstream   dataBase; 
 
     if (argc == 1 || argc > 2)
     {
-        std::cerr << "\e[21;31mError\e[0m\n";
+        std::cerr << "Error: could not open file." << std::endl;
         return (1);
     }
-
-    try
+    dataBase.open("data.csv");
+    while (std::getline(dataBase, line))
     {
-        RPN rpn(argv[1]);
-        result =rpn.ProcessCalcul();
-        std::cout << result << std::endl;
-    }
-    catch (const std::runtime_error& err)
-    {
-        std::cerr << err.what() << std::endl;
-    }
-    catch (const std::out_of_range& err)
-    {
-        std::cerr << err.what() << std::endl;
-    }
-    catch ( ... )
-    {
-        std::cerr << "\e[1;21;31mError\e[0m";
+        std::cout << line << std::endl;
     }
     return (0);
 }
-

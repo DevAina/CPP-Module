@@ -6,11 +6,12 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:21:44 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/18 15:09:08 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/22 08:42:24 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
+#include <cctype>
 #include <sstream>
 #include <stdexcept>
 #include <cstdlib>
@@ -64,15 +65,45 @@ RPN &RPN::operator=(const RPN& other)
 
 RPN::RPN(const char *arg)
 {
+    std::string currentNumber;
+
     result = 0;
-    char    str[2];
     for (int i = 0; arg[i] != '\0'; i++)
     {
         if (arg[i] == ' ')
+        {
+            if (!currentNumber.empty())
+            {
+                if (currentNumber.size() > 1 ||
+                        (atoi(currentNumber.c_str()) > 9 || atoi(currentNumber.c_str()) < 0))
+                    throw std::invalid_argument("\e[1;21;31mInvalid argument\e[0m");
+                input.push_back(currentNumber);
+                currentNumber.clear();
+            }
             continue ;
-        str[0] = arg[i];
-        str[1] = '\0';
-        input.push_back(str);
+        }
+        if (isdigit(arg[i]))
+            currentNumber += arg[i];
+        else
+        {
+            if (!currentNumber.empty())
+            {
+                if (currentNumber.size() > 1 ||
+                        (atoi(currentNumber.c_str()) > 9 || atoi(currentNumber.c_str()) < 0))
+                    throw std::invalid_argument("\e[1;21;31mInvalid argument\e[0m");
+                input.push_back(currentNumber);
+                currentNumber.clear();
+            }
+            input.push_back(std::string(1, arg[i]));
+        }
+    }
+    if (!currentNumber.empty())
+    {
+        if (currentNumber.size() > 1 ||
+                (atoi(currentNumber.c_str()) > 9 || atoi(currentNumber.c_str()) < 0))
+            throw std::invalid_argument("\e[1;21;31mInvalid argument\e[0m");
+        input.push_back(currentNumber);
+        currentNumber.clear();
     }
 }
 

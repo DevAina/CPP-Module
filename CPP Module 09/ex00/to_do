@@ -1,0 +1,62 @@
+                                Bitcoin Exchange 
+
+1. Fonction principale (main)
+
+Vérifier si un fichier a été fourni en argument
+- Vérifier le nombre d'argument
+- Charger la base de données des prix Bitcoin
+- Ouvrir et traiter le fichier d'entrée
+- Gérer les erreurs principales
+
+2. Chargement de la base de données
+
+- Ouvrir et lire le fichier CSV des prix historiques.
+- Stocker les dates et les prix dans une structure.
+- Trier cette structure par dates (si elles ne sont pas déjà triées).
+
+3. Validation du format
+
+- Fonction pour valider le format d'une date (YYYY-MM-DD) --> CheckFormat(string)
+- Fonction pour valider qu'une valeur est un nombre positif inférieur à 1000 --> CheckNb(int)
+
+4. Recherche de prix
+Fonction qui recherche une date exacte dans la base de données
+Si la date exacte n'est pas trouvée, recherche de la date précédente la plus proche
+
+5. Calcul et affichage
+Fonction qui multiplie la quantité par le taux de change
+Formatage du résultat à afficher
+
+Algorithmes clés
+Algorithme de recherche de la date la plus proche
+Cet algorithme est crucial pour votre programme. Vous pourriez l'implémenter ainsi :
+
+Recherchez d'abord la date exacte dans votre structure de données
+Si trouvée, utilisez le taux correspondant
+Sinon, parcourez les dates de la base de données à rebours
+Retournez la première date qui est antérieure ou égale à la date recherchée
+
+Par exemple, vous pourriez stocker vos dates dans un tableau trié et utiliser une recherche binaire adaptée qui retourne l'élément exact ou son prédécesseur.
+Algorithme de validation de date
+Pour valider une date au format YYYY-MM-DD :
+
+Vérifiez que la chaîne contient exactement 10 caractères
+Vérifiez que le format est AAAA-MM-JJ avec des tirets aux bonnes positions --> lower_bound().
+Extrayez l'année, le mois et le jour
+Vérifiez que l'année, le mois et le jour sont des nombres.
+Vérifiez que le mois est entre 1 et 12
+Vérifiez que le jour est valide pour le mois donné (en tenant compte des années bissextiles)
+
+Gestion des structures de données
+-Un tableau associatif (dictionnaire/map) avec les dates comme clés et les prix comme valeurs. --> map.
+
+Flux de traitement pour chaque ligne
+Pour chaque ligne du fichier d'entrée :
+
+Séparez la ligne au niveau du séparateur " | "
+Validez la date (premier élément)
+Validez la valeur (deuxième élément)
+Si l'un des deux est invalide, affichez le message d'erreur approprié
+Sinon, recherchez le taux de change à la date donnée (ou à la date précédente la plus proche)
+Calculez le résultat en multipliant la valeur par le taux de change
+Affichez le résultat formaté

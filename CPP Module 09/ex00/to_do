@@ -17,6 +17,43 @@ Vérifier si un fichier a été fourni en argument
 3. Validation du format
 
 - Fonction pour valider le format d'une date (YYYY-MM-DD) --> CheckFormat(string)
+{
+    Méthode pour vérifier si une date est valide
+
+    Vérifier le format de base:
+        Vérifier que la chaîne a exactement 10 caractères (YYYY-MM-DD)
+        Vérifier que les tirets sont aux positions 4 et 7
+        Vérifier que tous les autres caractères sont des chiffres
+
+
+    Extraire les composantes de la date:
+
+        Extraire l'année (les 4 premiers caractères)
+        Extraire le mois (caractères 5 et 6)
+        Extraire le jour (caractères 8 et 9)
+
+
+    Convertir en entiers:
+
+    Convertir chaque composante en entier pour validation
+
+
+    Valider les valeurs:
+
+        Vérifier que l'année est positive (ou dans une plage raisonnable, par exemple 1900-2100)
+        Vérifier que le mois est entre 1 et 12
+        Vérifier que le jour est valide pour le mois donné
+
+
+    Valider les jours selon le mois:
+
+        Si mois a 31 jours (1, 3, 5, 7, 8, 10, 12): jour entre 1 et 31
+        Si mois a 30 jours (4, 6, 9, 11): jour entre 1 et 30
+        Si mois est février (2):
+
+    Si année bissextile: jour entre 1 et 29:(Pour savoir si une année est bissextile, il suffit de vérifier si elle répond à certaines conditions. Une année est bissextile si elle est divisible par 4, à l'exception des années qui sont également divisibles par 100, sauf si elles sont également divisibles par 400. Autrement dit, une année est bissextile si elle est un multiple de 4 mais pas de 100, ou si elle est un multiple de 400. Cette règle permet de déterminer si une année a 365 ou 366 jours, une caractéristique importante de l'année.)
+    Sinon: jour entre 1 et 28
+}
 - Fonction pour valider qu'une valeur est un nombre positif inférieur à 1000 --> CheckNb(int)
 
 4. Recherche de prix

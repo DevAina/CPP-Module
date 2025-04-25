@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:01 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/24 12:57:01 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/25 14:16:35 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ bool    BitcoinExchange::dateIsValid(const std::string& date) const
     std::string monthString = date.substr(5, 2);
     int month = atoi(monthString.c_str());
     std::string dayString = date.substr(8, 2);
-    int day = atoi(monthString.c_str());
+    int day = atoi(dayString.c_str());
 
     /********CHeck year**************/
     if (year < 0 || (year < 1800 || year >= 2025))
@@ -117,13 +117,16 @@ bool    BitcoinExchange::dateIsValid(const std::string& date) const
     }
     if (month == 4 || month == 6 || month == 9 || month == 11)
     {
-        if (day < 1 || day < 30)
+        if (day < 1 || day > 30)
             return (false);
     }
     if (month == 2)
     {
-        if ((month % 4 != 0 && month % 100 == 0) || (month % 4 != 0 && month && 100 != 0 && month % 400 != 0))
-            return (false);
+        if ((month % 4 != 0 && month % 100 != 0) || (month % 4 == 0 && month && 100 == 0 && month % 400 == 0))
+        {
+            if (day < 1 || day > 29)
+                return (false);
+        };
     }
     return (true);
 }
@@ -151,14 +154,15 @@ float   BitcoinExchange::getExchangeRates(const std::string& date, const float& 
         return (-1);
     }
     itlow = container.lower_bound(date);
+    ExchangeRates = itlow->second;
     if (itlow == container.end())
     {
         itlow--;
         ExchangeRates = itlow->second;
     }
-    else
+    else if (itlow != container.begin())
     {
-        if (itlow->first > date)
+        if (itlow->first != date)
             itlow--;
         ExchangeRates = itlow->second;
     }

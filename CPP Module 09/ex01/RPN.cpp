@@ -16,9 +16,9 @@
 #include <stdexcept>
 #include <cstdlib>
 
-static std::deque<std::string>::iterator  getOperator(std::deque<std::string>& input)
+static std::vector<std::string>::iterator  getOperator(std::vector<std::string>& input)
 {
-    std::deque<std::string>::iterator it = input.begin();
+    std::vector<std::string>::iterator it = input.begin();
 
     for (; it != input.end(); it++)
     {
@@ -37,7 +37,7 @@ static std::deque<std::string>::iterator  getOperator(std::deque<std::string>& i
     return (it);
 }
 
-static bool    isOperator(std::deque<std::string>::iterator it)
+static bool    isOperator(std::vector<std::string>::iterator it)
 {
     if (*it == "+" || *it == "-" || *it == "/" || *it == "*")
         return (true);
@@ -115,7 +115,7 @@ int    RPN::ProcessCalcul()
 {
     if (input.size() == 1)
         return (result);
-    std::deque<std::string>::iterator it = getOperator(input);
+    std::vector<std::string>::iterator it = getOperator(input);
     if (it == input.end())
         return (result);
 

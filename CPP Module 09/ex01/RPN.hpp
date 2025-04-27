@@ -14,12 +14,12 @@
 # define RPN_HPP
 
 #include <string>
-#include <deque>
+#include <vector>
 
 class   RPN
 {
     private:
-        std::deque<std::string>    input;
+        std::vector<std::string>    input;
         int                         result;
         RPN();
         RPN(const RPN& other);

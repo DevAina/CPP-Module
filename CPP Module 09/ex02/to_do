@@ -27,11 +27,11 @@ Rejeter les valeurs négatives
 
 	Formation des paires:
 		Diviser les éléments en paires (a, b)
-		Pour chaque paire, ordonner a ≤ b
+		Pour chaque paire, ordonner a ≤ b ==> Tri des paires
 
 	Séparation en deux groupes:
-		Groupe A: éléments plus petits des paires
-		Groupe B: éléments plus grands des paires
+		Groupe A: éléments plus petits des paires (a)
+		Groupe B: éléments plus grands des paires (b)
 	Si nombre impair d'éléments, l'élément supplémentaire reste en attente
 
 Tri récursif:
@@ -54,4 +54,4 @@ Séquence: 0, 1, 1, 3, 5, 11, 21, 43, 85...
 
 
 5. Séquence de Jacobsthaul:
-	A génèrer apres avoir otenu tout les nombres
+	A génèrer apres avoir otenu tout les nombres (sus: )

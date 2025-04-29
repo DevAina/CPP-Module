@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:21:44 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/22 08:42:24 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:38:34 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 #include <cctype>
+#include <iterator>
 #include <sstream>
 #include <stdexcept>
 #include <cstdlib>
 
-static std::vector<std::string>::iterator  getOperator(std::vector<std::string>& input)
+static std::list<std::string>::iterator  getOperator(std::list<std::string>& input)
 {
-    std::vector<std::string>::iterator it = input.begin();
+    std::list<std::string>::iterator it = input.begin();
 
     for (; it != input.end(); it++)
     {
@@ -37,7 +38,7 @@ static std::vector<std::string>::iterator  getOperator(std::vector<std::string>&
     return (it);
 }
 
-static bool    isOperator(std::vector<std::string>::iterator it)
+static bool    isOperator(std::list<std::string>::iterator it)
 {
     if (*it == "+" || *it == "-" || *it == "/" || *it == "*")
         return (true);
@@ -111,50 +112,54 @@ RPN::~RPN()
 {
 }
 
-int    RPN::ProcessCalcul()
+int RPN::ProcessCalcul()
 {
     if (input.size() == 1)
-        return (result);
-    std::vector<std::string>::iterator it = getOperator(input);
-    if (it == input.end())
-        return (result);
+        return result;
 
-    /******Check if operande is ok (* + - /)****************/
+    std::list<std::string>::iterator it = getOperator(input);
+    if (it == input.end())
+        throw std::runtime_error("\e[1;21;31mError\e[0m");
+
     if (!isOperator(it))
         throw std::runtime_error("\e[1;21;31mError\e[0m");
-    unsigned int    dist = distance(input.begin(), it);
-    std::string  str;
-    std::string  str1;
 
-    try
-    {
-        str = input.at(dist - 2);
-        str1 = input.at(dist - 1);
-    }
-    catch (const std::out_of_range& err)
-    {
+    unsigned int dist = std::distance(input.begin(), it);
+    if (dist < 2)
         throw std::runtime_error("\e[1;21;31mError\e[0m");
-    }
 
+    std::list<std::string>::iterator    it1 = it;
+    std::advance(it1, -1);
+    std::list<std::string>::iterator    it0 = it1;
+    std::advance(it0, -1);
+
+    int operand1 = std::atoi(it0->c_str());
+    int operand2 = std::atoi(it1->c_str());
 
     if (*it == "+")
-        result = atoi(str.c_str()) + atoi(str1.c_str());
+        result = operand1 + operand2;
     else if (*it == "-")
-        result = atoi(str.c_str()) - atoi(str1.c_str());
+        result = operand1 - operand2;
     else if (*it == "*")
-        result = atoi(str.c_str()) * atoi(str1.c_str());
+        result = operand1 * operand2;
     else if (*it == "/")
-        result = atoi(str.c_str()) / atoi(str1.c_str());
+    {
+        if (operand2 == 0)
+            throw std::runtime_error("\e[1;21;31mDivision by zero\e[0m");
+        result = operand1 / operand2;
+    }
 
-    input.erase(input.begin() + (dist - 2));
-    input.erase(input.begin() + (dist - 2));
-    input.erase(input.begin() + (dist - 2));
+    input.erase(it0);
+    input.erase(it1);
+    input.erase(it);
 
-    /***********Convert result to string**************/
     std::ostringstream oss;
     oss << result;
+    std::list<std::string>::iterator    begin = input.begin();
+    std::advance(begin, dist - 2);
 
-    input.insert(input.begin() + (dist - 2), oss.str());
-    ProcessCalcul();
-    return (result);
+    input.insert(begin, oss.str());
+
+    return (ProcessCalcul());
 }
+

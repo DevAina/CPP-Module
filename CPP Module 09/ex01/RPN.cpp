@@ -68,7 +68,7 @@ RPN::RPN(const char *arg)
 {
     std::string currentNumber;
 
-    result = 0;
+    this->result = 0;
     for (int i = 0; arg[i] != '\0'; i++)
     {
         if (arg[i] == ' ')

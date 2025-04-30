@@ -8,7 +8,7 @@ Aldo de Ford-Johnson: combinaison entre tru fusion et tri-insertion.
 - PmergeMe.hpp: prototype classe PmergeMe
 [
 	Classe qui ne peut être instancier par copie ou par assignement.
-	2containeurs: list et deques
+	2containeurs: vector et deques
 	Methodes: algo ford Johnson pour chaque containeurs
 ]
 - main.cpp

@@ -6,11 +6,12 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/30 13:09:22 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/01 22:28:35 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <algorithm>
 #include <cstdlib>
 #include <stdexcept>
 #include <limits>
@@ -80,6 +81,200 @@ void	PmergeMe::ParseInput(const int& argc, char **argv)
 	}
 }
 
+std::vector<std::pair<int, int> >	PmergeMe::createPaire(std::vector<int>& container)
+{
+	std::vector<std::pair<int, int> > vectorPair;
+	size_t len = container.size();
+
+	if (len % 2 != 0)
+		len -= 1;
+	for (size_t i = 0 ; i < len - 1 ; i += 2)
+	{
+		int	a = container[i];
+		int	b = container[i + 1];
+
+		if (a > b)
+		{
+			int tmp = a;
+			a = b;
+			b = tmp;
+		}
+		std::pair<int, int> pairInt(a, b);
+		vectorPair.push_back(pairInt);
+	}
+	return (vectorPair);
+}
+
+std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
+{
+	size_t	lenContainer =container.size();
+	if (lenContainer == 1)
+		return (container);
+
+	std::vector<std::pair<int, int> >	pairVect = createPaire(container);
+	int	rest = -1;
+	if (lenContainer % 2 != 0)
+		rest = container[lenContainer - 1];
+	std::vector<int>	maxPair;
+	std::vector<int>	minPair;
+	size_t	len = pairVect.size();
+
+	for (size_t i = 0; i < len; i++)
+	{
+		maxPair.push_back(pairVect[i].second);
+		if (pairVect[i].first > 0)
+			minPair.push_back(pairVect[i].first);
+	}
+
+	maxPair = mergeInsertSortVect(maxPair);
+
+	std::cout << " ******************* Main Chain: " << std::endl;
+	for (size_t i = 0; i < maxPair.size() ; i++)
+		std::cout << "[" << maxPair[i] << "]" ;
+	std::cout <<  std::endl;
+	std::cout << " ******************* Pend Chain: " << std::endl;
+	for (size_t i = 0; i < minPair.size() ; i++)
+		std::cout << "[" << minPair[i] << "]" ;
+	std::cout << std::endl;
+	/*********Generate sequence Jackobsthal*************/
+	std::vector<size_t>	jacobsthalNumber = this->sequenceJacobsthal(minPair.size());
+	std::cout << " ******************* Jacobsthal Nmber: " << std::endl;
+	for (size_t i = 0; i < jacobsthalNumber.size() ; i++)
+		std::cout << "[" << jacobsthalNumber[i] << "]" ;
+	std::cout << std::endl;
+
+	std::vector<size_t>	positionNumber = this->generateInsertPosition(jacobsthalNumber, minPair.size());
+	std::cout << " ******************* INdex d'insertion: " << std::endl;
+	for (size_t i = 0; i < positionNumber.size() ; i++)
+		std::cout << "[" << positionNumber[i] << "]" ;
+	std::cout << std::endl;
+	std::multimap<size_t, int>	insertion;
+
+	size_t	lenPositionNumber = positionNumber.size();
+	for (size_t i = 0; i < lenPositionNumber ; i++)
+		insertion.insert(std::make_pair(positionNumber[i], minPair[i]));
+
+	std::cout << " ******************* Ordre d'insertion: " << std::endl;
+	std::multimap<size_t, int>::iterator	it = insertion.begin();
+	for( ;  it != insertion.end(); it++)
+	{
+		std::cout << it->first << ":" << it->second << " ";
+	}
+	std::cout << std::endl;
+
+	this->insertElementsVector(maxPair, minPair, insertion);
+	if (rest != -1)
+	{
+		int	begin = 0;
+		int	end = maxPair.size() - 1;
+		while (begin <= end)
+		{
+			int	middle = (begin + end) / 2;
+			if (maxPair[middle] > rest)
+				end = middle - 1;
+			else
+				begin = middle + 1;
+		}
+		size_t	posElementToInsert = begin;
+		maxPair.insert(maxPair.begin() + posElementToInsert, rest);
+	}
+	std::cout << "\e[45m******************* Trie success ";
+	for (size_t i = 0; i < maxPair.size() ; i++)
+		std::cout << "[" << maxPair[i] << "]" ;
+	std::cout <<  "*************************************\e[0m"<<std::endl;
+	return (maxPair);
+}
+
+std::vector<size_t>	PmergeMe::sequenceJacobsthal(size_t n)
+{
+	std::vector<size_t>	jacobsthal;
+	if (n == 0)
+		return jacobsthal;
+
+	jacobsthal.push_back(0);
+	jacobsthal.push_back(1);
+	if (n == 1)
+		return (jacobsthal);
+	for (size_t i = 2; jacobsthal[i - 1] < n; i++)
+	{
+		jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
+		if (jacobsthal[i - 1] + 2 * jacobsthal[i - 2] >= n)
+			break ;
+	}
+	return (jacobsthal);
+}
+
+/*std::vector<size_t>	PmergeMe::generateInsertPosition(std::vector<size_t>& sequence, size_t len)
+{
+	std::vector<size_t>	pos;
+	size_t		prev = sequence[1];
+	size_t	lenSequence = sequence.size();
+
+	if (len == 1)
+	{
+		pos.push_back(sequence[1]);
+		return (pos);
+	}
+	for (size_t i = 2; i < lenSequence - 1 ; i++)
+	{
+		if (prev != sequence[i])
+			pos.push_back(sequence[i]);
+		prev = sequence[i];
+	}
+	for (size_t i = len ; i > 1 ; i--)
+	{
+		if (std::find(sequence.begin(), sequence.end(), i) != sequence.end())
+			pos.push_back(i);
+	}
+	return (pos);
+}*/
+
+std::vector<size_t> PmergeMe::generateInsertPosition(std::vector<size_t>& jacobsthal, size_t size)
+{
+    std::vector<size_t> positions;
+
+    positions.push_back(1);
+
+    for (size_t i = 1; i < jacobsthal.size() - 1; i++)
+    {
+        for (size_t j = jacobsthal[i + 1] - 1; j > jacobsthal[i]; j--)
+        {
+            if (j <= size)
+                positions.push_back(j);
+        }
+    }
+	for (size_t i = size ; i > 1 ; i--)
+	{
+		if (std::find(jacobsthal.begin(), jacobsthal.end(), i) != jacobsthal.end())
+			positions.push_back(i);
+	}
+    return positions;
+}
+
+void	PmergeMe::insertElementsVector(std::vector<int>& mainChain, std::vector<int>& pend,
+		std::multimap<size_t, int>& insertion)
+{
+	(void)pend;
+	std::multimap<size_t, int>::iterator	it = insertion.begin();
+
+	for( ;  it != insertion.end(); it++)
+	{
+		int	begin = 0;
+		int	end = mainChain.size() - 1;
+		while (begin <= end)
+		{
+			int	middle = (begin + end) / 2;
+			if (mainChain[middle] > it->second)
+				end = middle - 1;
+			else
+				begin = middle + 1;
+		}
+		size_t	posElementToInsert = begin;
+		mainChain.insert(mainChain.begin() + posElementToInsert, it->second);
+	}
+}
+
+
 PmergeMe::PmergeMe(const int& argc, char **argv)
 {
 	this->ParseInput(argc, argv);
@@ -89,14 +284,22 @@ PmergeMe::~PmergeMe()
 {
 }
 
-void	PmergeMe::PrintContainer() const
+void	PmergeMe::PrintContainer()
 {
+	std::vector<int> tmp = this->containerVector;
+	tmp = this->mergeInsertSortVect(tmp);
 	std::vector<int>::const_iterator	itVector = this->containerVector.begin();
 	std::deque<int>::const_iterator	itDeque = this->containerDeque.begin();
 	std::cout << "\e[7;1;42m =============================== Vector ================================\e[0m" << std::endl;
 	for ( ; itVector != this->containerVector.end() ; itVector++)
 	{
 		std::cout << *itVector << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "=== Pair vector ===" << std::endl;
+	for (size_t i = 0; i < tmp.size() ; i++)
+	{
+		std::cout << "[" << tmp[i] << "]";
 	}
 	std::cout << std::endl;
 

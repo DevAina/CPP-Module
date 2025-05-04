@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	try
 	{
 		PmergeMe	pmerge(argc, argv);
-		pmerge.PrintContainer();
+		pmerge.PrintInfo();
 	}
 	catch (const std::invalid_argument& err)
 	{

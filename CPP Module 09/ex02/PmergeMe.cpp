@@ -6,16 +6,18 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/03 21:00:38 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:58:21 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <iomanip>
 #include <cstdlib>
 #include <stdexcept>
 #include <limits>
 #include <iostream>
 #include <vector>
+#include <ctime>
 
 PmergeMe::PmergeMe()
 {
@@ -80,125 +82,90 @@ void	PmergeMe::ParseInput(const int& argc, char **argv)
 	}
 }
 
-std::vector<std::pair<int, int> >	PmergeMe::createPair(std::vector<int>& container)
-{
-	std::vector<std::pair<int, int> > vectorPair;
-	size_t len = container.size();
-
-	if (len % 2 != 0)
-		len -= 1;
-	for (size_t i = 0 ; i < len - 1 ; i += 2)
-	{
-		int	a = container[i];
-		int	b = container[i + 1];
-
-		if (a > b)
-		{
-			int tmp = a;
-			a = b;
-			b = tmp;
-		}
-		std::pair<int, int> pairInt(a, b);
-		vectorPair.push_back(pairInt);
-	}
-	return (vectorPair);
-}
-
 std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 {
 	size_t	lenContainer =container.size();
 	if (lenContainer == 1)
 		return (container);
 
-	std::vector<std::pair<int, int> >	pairVect = this->createPair(container);
+	std::vector<std::pair<int, int> >	pairVect = createPair<std::vector<int>, std::vector<std::pair<int, int> > >(container);
 	int	rest = -1;
 	if (lenContainer % 2 != 0)
 		rest = container[lenContainer - 1];
-	std::vector<int>	maxPair;
-	std::vector<int>	minPair;
+	std::vector<int>	mainChain;
+	std::vector<int>	pend;
 	size_t	len = pairVect.size();
 
 	for (size_t i = 0; i < len; i++)
 	{
-		maxPair.push_back(pairVect[i].second);
+		mainChain.push_back(pairVect[i].second);
 		if (pairVect[i].first > 0)
-			minPair.push_back(pairVect[i].first);
+			pend.push_back(pairVect[i].first);
 	}
 
-	maxPair = mergeInsertSortVect(maxPair);
+	mainChain = mergeInsertSortVect(mainChain);
 
 	/*********Generate sequence Jackobsthal*************/
-	std::vector<size_t>	jacobsthalNumber = sequenceJacobsthal<std::vector<size_t> >(minPair.size());
-	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(jacobsthalNumber, minPair.size());
+	std::vector<size_t>	jacobsthalNumber = sequenceJacobsthal<std::vector<size_t> >(pend.size());
+	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(jacobsthalNumber, pend.size());
 	std::multimap<size_t, int>	insertion;
 
 	size_t	lenPositionNumber = positionNumber.size();
 	for (size_t i = 0; i < lenPositionNumber ; i++)
-		insertion.insert(std::make_pair(positionNumber[i], minPair[i]));
+		insertion.insert(std::make_pair(positionNumber[i], pend[i]));
 
 
-	this->insertElementsVector(maxPair, minPair, insertion);
+	insertElements<std::vector<int> >(mainChain, insertion);
 	if (rest != -1)
 	{	
-		size_t	posElementToInsert = std::lower_bound(maxPair.begin(), maxPair.end(), rest) - maxPair.begin();
-		maxPair.insert(maxPair.begin() + posElementToInsert, rest);
+		size_t	posElementToInsert = std::lower_bound(mainChain.begin(), mainChain.end(), rest) - mainChain.begin();
+		mainChain.insert(mainChain.begin() + posElementToInsert, rest);
 	}
-	return (maxPair);
+	return (mainChain);
 }
 
-/*std::vector<size_t>	PmergeMe::sequenceJacobsthal(size_t n)
+std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 {
-	std::vector<size_t>	jacobsthal;
-	if (n == 0)
-		return jacobsthal;
+	size_t	lenContainer =container.size();
+	if (lenContainer == 1)
+		return (container);
 
-	jacobsthal.push_back(0);
-	jacobsthal.push_back(1);
-	if (n == 1)
-		return (jacobsthal);
-	for (size_t i = 2; jacobsthal[i - 1] < n; i++)
+	std::deque<std::pair<int, int> >	pairVect = createPair<std::deque<int>, std::deque<std::pair<int, int> > >(container);
+	int	rest = -1;
+	if (lenContainer % 2 != 0)
+		rest = container[lenContainer - 1];
+	std::deque<int>	mainChain;
+	std::deque<int>	pend;
+	size_t	len = pairVect.size();
+
+	for (size_t i = 0; i < len; i++)
 	{
-		jacobsthal.push_back(jacobsthal[i - 1] + 2 * jacobsthal[i - 2]);
-		if (jacobsthal[i - 1] + 2 * jacobsthal[i - 2] >= n)
-			break ;
+		mainChain.push_back(pairVect[i].second);
+		if (pairVect[i].first > 0)
+			pend.push_back(pairVect[i].first);
 	}
-	return (jacobsthal);
-}
 
-std::vector<size_t> PmergeMe::generateInsertPosition(std::vector<size_t>& jacobsthal, size_t size)
-{
-    std::vector<size_t> positions;
+	mainChain = mergeInsertSortDeque(mainChain);
 
-    positions.push_back(1);
+	/*********Generate sequence Jackobsthal*************/
+	std::deque<size_t>	jacobsthalNumber = sequenceJacobsthal<std::deque<size_t> >(pend.size());
+	std::deque<size_t>	positionNumber = generateInsertPosition<std::deque<size_t> >(jacobsthalNumber, pend.size());
+	std::multimap<size_t, int>	insertion;
 
-    for (size_t i = 1; i < jacobsthal.size() - 1; i++)
-    {
-        for (size_t j = jacobsthal[i + 1] - 1; j > jacobsthal[i]; j--)
-        {
-            if (j <= size)
-                positions.push_back(j);
-        }
-    }
-	for (size_t i = size ; i > 1 ; i--)
-	{
-		if (std::find(jacobsthal.begin(), jacobsthal.end(), i) != jacobsthal.end())
-			positions.push_back(i);
-	}
-    return positions;
-}*/
+	size_t	lenPositionNumber = positionNumber.size();
+	for (size_t i = 0; i < lenPositionNumber ; i++)
+		insertion.insert(std::make_pair(positionNumber[i], pend[i]));
 
-void	PmergeMe::insertElementsVector(std::vector<int>& mainChain, std::vector<int>& pend,
-		std::multimap<size_t, int>& insertion)
-{
-	(void)pend;
-	std::multimap<size_t, int>::iterator	it = insertion.begin();
 
-	for( ;  it != insertion.end(); it++)
+	insertElements<std::deque<int> >(mainChain, insertion);
+	if (rest != -1)
 	{	
-		size_t	posElementToInsert = std::lower_bound(mainChain.begin(), mainChain.end(), it->second) - mainChain.begin();
-		mainChain.insert(mainChain.begin() + posElementToInsert, it->second);
+		size_t	posElementToInsert = std::lower_bound(mainChain.begin(), mainChain.end(), rest) - mainChain.begin();
+		mainChain.insert(mainChain.begin() + posElementToInsert, rest);
 	}
+	return (mainChain);
 }
+
 
 
 PmergeMe::PmergeMe(const int& argc, char **argv)
@@ -210,29 +177,38 @@ PmergeMe::~PmergeMe()
 {
 }
 
-void	PmergeMe::PrintContainer()
+void	PmergeMe::PrintInfo()
 {
-	std::vector<int> tmp = this->containerVector;
-	tmp = this->mergeInsertSortVect(tmp);
-	std::vector<int>::const_iterator	itVector = this->containerVector.begin();
-	std::deque<int>::const_iterator	itDeque = this->containerDeque.begin();
+	std::vector<int> cpyVect = this->containerVector;
+	std::deque<int> cpyDeque = this->containerDeque;
+
+	std::clock_t	startVect = clock();
+	cpyVect = this->mergeInsertSortVect(cpyVect);
+	std::clock_t	endVect = clock();
+	double elapsedsecondsVect = static_cast<double>(endVect - startVect) / CLOCKS_PER_SEC;
+
+	std::clock_t	startDeque = clock();
+	cpyDeque = this->mergeInsertSortDeque(cpyDeque);
+	std::clock_t	endDeque = clock();	
+	double elapsedsecondsDeque = static_cast<double>(endDeque - startDeque) / CLOCKS_PER_SEC;
 	std::cout << "\e[7;1;42m =============================== Vector ================================\e[0m" << std::endl;
-	for ( ; itVector != this->containerVector.end() ; itVector++)
+	for (size_t i = 0; i < cpyVect.size() ; i++)
 	{
-		std::cout << *itVector << " ";
-	}
-	std::cout << std::endl;
-	std::cout << "=== Pair vector ===" << std::endl;
-	for (size_t i = 0; i < tmp.size() ; i++)
-	{
-		std::cout << "[" << tmp[i] << "]";
+		std::cout << "[" << cpyVect[i] << "]";
 	}
 	std::cout << std::endl;
 
+	std::cout << "\e[45m Time to process a range of std::vector of "
+		<< this->containerVector.size() << " elments with std::vector: "
+		<< std::fixed << std::setprecision(5) << elapsedsecondsVect<< "\e[0m" << std::endl;
+
 	std::cout << "\e[7;1;42m =============================== Deque =====================================\e[0m" << std::endl;
-	for ( ; itDeque != this->containerDeque.end() ; itDeque++)
+	for (size_t i = 0; i < cpyDeque.size() ; i++)
 	{
-		std::cout << *itDeque << " ";
+		std::cout << "[" << cpyDeque[i] << "]";
 	}
 	std::cout << std::endl;
+	std::cout << "\e[45m Time to process a range of std::vector of "
+		<< this->containerVector.size() << " elments with std::vector: "
+		<< std::fixed << std::setprecision(5) << elapsedsecondsDeque << "\e[0m" << std::endl;
 }

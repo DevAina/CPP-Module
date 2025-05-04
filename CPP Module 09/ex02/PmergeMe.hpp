@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:39:28 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/03 20:59:23 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/04 20:35:23 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,42 @@
 # include <vector>
 # include <string>
 # include <utility>
+
+template <typename Container>
+void	insertElements(Container& mainChain, std::multimap<size_t, int>& insertion)
+{
+	std::multimap<size_t, int>::iterator	it = insertion.begin();
+	std::multimap<size_t, int>::iterator	end = insertion.end();
+
+	for (; it != end; it++)
+	{
+		size_t	posElementToInsert =std::lower_bound(mainChain.begin(), mainChain.end(), it->second) - mainChain.begin();
+		mainChain.insert(mainChain.begin() + posElementToInsert, it->second);
+	}
+}
+	
+
+template <typename Container,
+		 typename OutputCOntainer>
+OutputCOntainer	createPair(Container& container)
+{
+	OutputCOntainer	pairC;
+	size_t	len = container.size();
+
+	if (len % 2 != 0)
+		len -= 1;
+	for (size_t i = 0; i < len - 1; i += 2)
+	{
+		int	a = container[i];
+		int	b = container[i + 1];
+
+		if (a > b)
+			std::swap(a, b);
+		std::pair<int, int>	pairInt(a, b);
+		pairC.push_back(pairInt);
+	}
+	return (pairC);
+}
 
 template <typename Container>
 Container	sequenceJacobsthal(size_t n)
@@ -78,14 +114,13 @@ class PmergeMe
 		void		ParseInput(const int& argc, char **argv);
 
 		/********************std::vector******************/
-		std::vector<std::pair<int, int> >	createPair(std::vector<int>& container);
 		std::vector<int>	mergeInsertSortVect(std::vector<int>& container);
-		void	insertElementsVector(std::vector<int>& mainChain, std::vector<int>& pend, std::multimap<size_t, int>& pos);
+		std::deque<int>		mergeInsertSortDeque(std::deque<int>& container);
 
 	public:
 		PmergeMe(const int& argc, char **argv);
 		~PmergeMe();
-		void PrintContainer();
+		void PrintInfo();
 };
 
 #endif

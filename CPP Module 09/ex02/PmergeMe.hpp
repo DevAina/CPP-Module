@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:39:28 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/05 13:16:10 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:23:43 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 
 # include <deque>
 # include <algorithm>
-# include <map>
 # include <vector>
 # include <string>
 # include <utility>
 
-template <typename Container>
-void	insertElements(Container& mainChain, std::multimap<size_t, int>& insertion)
+template <typename Container,
+		typename ContainerJacobsthal>
+void	insertElements(Container& mainChain, Container& pend, ContainerJacobsthal& insertPos)
 {
-	std::multimap<size_t, int>::iterator	it = insertion.begin();
-	std::multimap<size_t, int>::iterator	end = insertion.end();
+	size_t	len = insertPos.size();
 
-	for (; it != end; it++)
+	for (size_t i = 0; i < len ; i++)
 	{
-		size_t	posElementToInsert =std::lower_bound(mainChain.begin(), mainChain.end(), it->second) - mainChain.begin();
-		mainChain.insert(mainChain.begin() + posElementToInsert, it->second);
+		size_t posElementToInsert = std::lower_bound(mainChain.begin(),
+			mainChain.end(), pend[insertPos[i] - 1]) - mainChain.begin();
+		mainChain.insert(mainChain.begin() + posElementToInsert, pend[insertPos[i] - 1]);
 	}
 }
 	
@@ -76,30 +76,26 @@ Container	sequenceJacobsthal(size_t n)
 	return (jacobsthal);
 }
 
-#include <iostream>
 
 template <typename Container>
 Container	generateInsertPosition(Container& jacobsthal, size_t size)
 {
 	Container	positions;
 	size_t	lenJacobsthal = jacobsthal.size();
+	typename Container::iterator	end = jacobsthal.end();
 
 	positions.push_back(1);
-	for (size_t i = 3; i < lenJacobsthal; i++)
+	for (size_t i = 1; i < lenJacobsthal - 1; i++)
 	{
-		size_t	actual = jacobsthal[i];
-		size_t	prev = jacobsthal[i - 1];
-		size_t	nbElement = actual - prev;
-		for (size_t j = 0; j < nbElement; j++)
+		for (size_t j = jacobsthal[i + 1] - 1; j > jacobsthal[i]; j--)
 		{
-			if (actual <= size)
-				positions.push_back(actual);
-			actual--;
+			if (j <= size)
+				positions.push_back(j);
 		}
 	}
 	for (size_t i = size; i > 1; i--)
 	{
-		if (std::find(positions.begin(), positions.end(), i) == positions.end())
+		if (std::find(jacobsthal.begin(), jacobsthal.end(), i) != end)
 			positions.push_back(i);
 	}
 	return positions;

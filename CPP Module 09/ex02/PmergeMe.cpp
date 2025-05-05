@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/05 09:39:42 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/05 20:25:25 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,20 +107,10 @@ std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 
 	/*********Generate sequence Jackobsthal*************/
 	std::vector<size_t>	jacobsthalNumber = sequenceJacobsthal<std::vector<size_t> >(pend.size());
-	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(jacobsthalNumber, pend.size());
+	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(jacobsthalNumber, pend.size());	
 
-	for (size_t i = 0; i < positionNumber.size() ; i++)
-	{
-		std::cout << positionNumber[i] << " ";
-	}
-	std::cout << std::endl;
-	std::multimap<size_t, int>	insertion;
-	size_t	lenPositionNumber = positionNumber.size();
-	for (size_t i = 0; i < lenPositionNumber ; i++)
-		insertion.insert(std::make_pair(positionNumber[i], pend[i]));
-
-
-	insertElements<std::vector<int> >(mainChain, insertion);
+	insertElements<std::vector<int>,
+		std::vector<size_t> >(mainChain, pend, positionNumber);
 	if (rest != -1)
 	{	
 		size_t	posElementToInsert = std::lower_bound(mainChain.begin(), mainChain.end(), rest) - mainChain.begin();
@@ -155,14 +145,9 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 	/*********Generate sequence Jackobsthal*************/
 	std::deque<size_t>	jacobsthalNumber = sequenceJacobsthal<std::deque<size_t> >(pend.size());
 	std::deque<size_t>	positionNumber = generateInsertPosition<std::deque<size_t> >(jacobsthalNumber, pend.size());
-	std::multimap<size_t, int>	insertion;
 
-	size_t	lenPositionNumber = positionNumber.size();
-	for (size_t i = 0; i < lenPositionNumber ; i++)
-		insertion.insert(std::make_pair(positionNumber[i], pend[i]));
-
-
-	insertElements<std::deque<int> >(mainChain, insertion);
+	insertElements<std::deque<int> ,
+		std::deque<size_t> >(mainChain, pend, positionNumber);
 	if (rest != -1)
 	{	
 		size_t	posElementToInsert = std::lower_bound(mainChain.begin(), mainChain.end(), rest) - mainChain.begin();

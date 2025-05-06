@@ -6,13 +6,15 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/05 20:25:25 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:01:55 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+#include <deque>
 #include <iomanip>
 #include <cstdlib>
+#include <iterator>
 #include <stdexcept>
 #include <limits>
 #include <iostream>
@@ -105,6 +107,20 @@ std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 
 	mainChain = mergeInsertSortVect(mainChain);
 
+	for (size_t i = 0; i < len ; i++)
+	{
+		std::vector<int>::iterator	posinMain = std::find(mainChain.begin(), mainChain.end(), pairVect[i].second);
+		std::vector<int>::iterator	posPairPend = std::find(pend.begin(), pend.end(), pairVect[i].first);
+
+		size_t	indexMain = std::distance(mainChain.begin(), posinMain);
+		size_t	indexPend = std::distance(pend.begin(), posPairPend);
+		if (indexMain != indexPend)
+		{
+			std::swap(pend[indexMain], pend[indexPend]);
+		}
+
+	}
+
 	/*********Generate sequence Jackobsthal*************/
 	std::vector<size_t>	jacobsthalNumber = sequenceJacobsthal<std::vector<size_t> >(pend.size());
 	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(jacobsthalNumber, pend.size());	
@@ -142,6 +158,20 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 
 	mainChain = mergeInsertSortDeque(mainChain);
 
+	for (size_t i = 0; i < len ; i++)
+	{
+		std::deque<int>::iterator	posinMain = std::find(mainChain.begin(), mainChain.end(), pairVect[i].second);
+		std::deque<int>::iterator	posPairPend = std::find(pend.begin(), pend.end(), pairVect[i].first);
+
+		size_t	indexMain = std::distance(mainChain.begin(), posinMain);
+		size_t	indexPend = std::distance(pend.begin(), posPairPend);
+		if (indexMain != indexPend)
+		{
+			std::swap(pend[indexMain], pend[indexPend]);
+		}
+
+	}
+	
 	/*********Generate sequence Jackobsthal*************/
 	std::deque<size_t>	jacobsthalNumber = sequenceJacobsthal<std::deque<size_t> >(pend.size());
 	std::deque<size_t>	positionNumber = generateInsertPosition<std::deque<size_t> >(jacobsthalNumber, pend.size());
@@ -199,6 +229,6 @@ void	PmergeMe::PrintInfo()
 	}
 	std::cout << std::endl;
 	std::cout << "\e[45m Time to process a range of std::vector of "
-		<< this->containerVector.size() << " elments with std::vector: "
+		<< this->containerVector.size() << " elments with std::deque: "
 		<< std::fixed << std::setprecision(5) << elapsedsecondsDeque << "\e[0m" << std::endl;
 }

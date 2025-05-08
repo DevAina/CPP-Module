@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/06 11:01:55 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/08 12:28:04 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,50 +40,6 @@ PmergeMe&	PmergeMe::operator=(const PmergeMe& other)
 	return (*this);
 }
 
-void	PmergeMe::AddElement(std::string& element)
-{
-	long	number;
-
-	if (!element.empty())
-	{
-		number = atol(element.c_str());
-		if (number > std::numeric_limits<int>::max())
-			throw	std::invalid_argument("\e[31;1;21mError: Argument not valid. INT_MAX and is limit.\e[0m");
-		int cast = static_cast<int>(number);
-
-		this->containerVector.push_back(cast);
-		this->containerDeque.push_back(cast);
-		element.clear();
-	}
-}
-
-void	PmergeMe::ParseArgument(const char *arg)
-{
-	std::string	currentNumber;
-
-	for (int i = 0; arg[i] != '\0'; i++)
-	{
-		if (arg[i] == ' ')
-		{
-			this->AddElement(currentNumber);
-			continue ;
-		}
-		if (isdigit(arg[i]))
-			currentNumber += arg[i];
-		else
-			throw std::invalid_argument("\e[21;1;31mError: Argument must be digit and positive.\e[0m");
-	}
-	this->AddElement(currentNumber);
-}
-
-void	PmergeMe::ParseInput(const int& argc, char **argv)
-{
-	for (int i = 1; i < argc; i++)
-	{
-		this->ParseArgument(argv[i]);
-	}
-}
-
 std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 {
 	size_t	lenContainer =container.size();
@@ -115,11 +71,11 @@ std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 		size_t	indexMain = std::distance(mainChain.begin(), posinMain);
 		size_t	indexPend = std::distance(pend.begin(), posPairPend);
 		if (indexMain != indexPend)
-		{
 			std::swap(pend[indexMain], pend[indexPend]);
-		}
-
 	}
+
+	mainChain.insert(mainChain.begin(), pend[0]);
+	pend.erase(pend.begin());
 
 	/*********Generate sequence Jackobsthal*************/
 	std::vector<size_t>	jacobsthalNumber = sequenceJacobsthal<std::vector<size_t> >(pend.size());
@@ -171,7 +127,10 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 		}
 
 	}
-	
+
+	mainChain.insert(mainChain.begin(), pend[0]);
+	pend.erase(pend.begin());
+
 	/*********Generate sequence Jackobsthal*************/
 	std::deque<size_t>	jacobsthalNumber = sequenceJacobsthal<std::deque<size_t> >(pend.size());
 	std::deque<size_t>	positionNumber = generateInsertPosition<std::deque<size_t> >(jacobsthalNumber, pend.size());
@@ -186,15 +145,32 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 	return (mainChain);
 }
 
-
-
-PmergeMe::PmergeMe(const int& argc, char **argv)
-{
-	this->ParseInput(argc, argv);
-}
-
 PmergeMe::~PmergeMe()
 {
+}
+
+std::vector<int>	PmergeMe::ParseForVect(const int& argc, char **argv)
+{
+	std::vector<int>	container = ParseInput<std::vector<int> >(argc, argv);
+	return (container);
+}
+
+std::deque<int>	PmergeMe::ParseForDeque(const int& argc, char **argv)
+{
+	std::deque<int>	container = ParseInput<std::deque<int> >(argc, argv);
+	return (container);
+}
+
+std::vector<int>	PmergeMe::SortVector(std::vector<int>& container)
+{
+	container = mergeInsertSortVect(container);
+	return (container);
+}
+
+std::deque<int>	PmergeMe::SortDeque(std::deque<int>& container)
+{
+	container = mergeInsertSortDeque(container);
+	return (container);
 }
 
 void	PmergeMe::PrintInfo()

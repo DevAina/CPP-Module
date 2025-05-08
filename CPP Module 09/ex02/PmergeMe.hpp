@@ -6,18 +6,20 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:39:28 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/05 20:23:43 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:56:44 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+#include <ctime>
 # include <deque>
 # include <algorithm>
 # include <vector>
-# include <string>
 # include <utility>
+
+# include "ParseArgument.hpp"
 
 template <typename Container,
 		typename ContainerJacobsthal>
@@ -84,6 +86,8 @@ Container	generateInsertPosition(Container& jacobsthal, size_t size)
 	size_t	lenJacobsthal = jacobsthal.size();
 	typename Container::iterator	end = jacobsthal.end();
 
+	if (size == 0)
+		return (positions);
 	positions.push_back(1);
 	for (size_t i = 1; i < lenJacobsthal - 1; i++)
 	{
@@ -106,20 +110,20 @@ class PmergeMe
 	private:
 		std::vector<int>	containerVector;
 		std::deque<int>		containerDeque;
+
 		PmergeMe();
 		PmergeMe(const PmergeMe& other);
 		PmergeMe&	operator=(const PmergeMe& other);
-		void		AddElement(std::string& element);
-		void		ParseArgument(const char *argv);
-		void		ParseInput(const int& argc, char **argv);
-
 		/********************std::vector******************/
-		std::vector<int>	mergeInsertSortVect(std::vector<int>& container);
-		std::deque<int>		mergeInsertSortDeque(std::deque<int>& container);
+		static std::vector<int>	mergeInsertSortVect(std::vector<int>& container);
+		static std::deque<int>		mergeInsertSortDeque(std::deque<int>& container);
 
 	public:
-		PmergeMe(const int& argc, char **argv);
 		~PmergeMe();
+		static std::vector<int>	ParseForVect(const int& argc, char **argv);
+		static std::deque<int>		ParseForDeque(const int& argc, char **argv);
+		static std::vector<int>	SortVector(std::vector<int>& container);
+		static std::deque<int>		SortDeque(std::deque<int>& container);
 		void PrintInfo();
 };
 

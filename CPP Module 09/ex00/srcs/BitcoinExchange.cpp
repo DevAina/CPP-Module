@@ -6,11 +6,11 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:01 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/25 14:16:35 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:18:53 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#include "../includes/BitcoinExchange.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
@@ -38,7 +38,7 @@ BitcoinExchange::BitcoinExchange()
     std::ifstream   database;
     std::string     line;
 
-    database.open("data.csv");
+    database.open("./srcs/data.csv");
     if (!database.is_open())
         throw std::runtime_error("\e[21;1;31m Could not open file DataBase. \e[0m");
     while (std::getline(database, line))

@@ -107,7 +107,6 @@ bool	Fixed::operator!=( const Fixed& other ) const
 }
 
 /*surcharge arithmetic operator*/
-
 Fixed	Fixed::operator+(const Fixed& other) const
 {
 	Fixed	result;

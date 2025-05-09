@@ -6,15 +6,16 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:07:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/04/25 14:17:29 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:15:51 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#include "../includes/BitcoinExchange.hpp"
 #include <exception>
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
+#include <stdexcept>
 #include <string>
 
 int main(int argc, char **argv)
@@ -50,6 +51,10 @@ int main(int argc, char **argv)
             }
         }
         inputFile.close();
+    }
+    catch (const std::runtime_error& err)
+    {
+        std::cout << err.what() << std::endl;
     }
     catch ( ... )
     {

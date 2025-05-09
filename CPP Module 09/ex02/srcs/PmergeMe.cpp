@@ -6,11 +6,11 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/08 12:28:04 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/09 13:44:53 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PmergeMe.hpp"
+#include "../includes/PmergeMe.hpp"
 #include <deque>
 #include <iomanip>
 #include <cstdlib>
@@ -32,11 +32,7 @@ PmergeMe::PmergeMe(const PmergeMe& other)
 
 PmergeMe&	PmergeMe::operator=(const PmergeMe& other)
 {
-	if (this != &other)
-	{
-		this->containerVector = other.containerVector;
-		this->containerDeque = other.containerDeque;
-	}
+	(void)other;
 	return (*this);
 }
 
@@ -78,8 +74,7 @@ std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 	pend.erase(pend.begin());
 
 	/*********Generate sequence Jackobsthal*************/
-	std::vector<size_t>	jacobsthalNumber = sequenceJacobsthal<std::vector<size_t> >(pend.size());
-	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(jacobsthalNumber, pend.size());	
+	std::vector<size_t>	positionNumber = generateInsertPosition<std::vector<size_t> >(pend.size());	
 
 	insertElements<std::vector<int>,
 		std::vector<size_t> >(mainChain, pend, positionNumber);
@@ -132,8 +127,7 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 	pend.erase(pend.begin());
 
 	/*********Generate sequence Jackobsthal*************/
-	std::deque<size_t>	jacobsthalNumber = sequenceJacobsthal<std::deque<size_t> >(pend.size());
-	std::deque<size_t>	positionNumber = generateInsertPosition<std::deque<size_t> >(jacobsthalNumber, pend.size());
+	std::deque<size_t>	positionNumber = generateInsertPosition<std::deque<size_t> >(pend.size());
 
 	insertElements<std::deque<int> ,
 		std::deque<size_t> >(mainChain, pend, positionNumber);
@@ -171,40 +165,4 @@ std::deque<int>	PmergeMe::SortDeque(std::deque<int>& container)
 {
 	container = mergeInsertSortDeque(container);
 	return (container);
-}
-
-void	PmergeMe::PrintInfo()
-{
-	std::vector<int> cpyVect = this->containerVector;
-	std::deque<int> cpyDeque = this->containerDeque;
-
-	std::clock_t	startVect = clock();
-	cpyVect = this->mergeInsertSortVect(cpyVect);
-	std::clock_t	endVect = clock();
-	double elapsedsecondsVect = static_cast<double>(endVect - startVect) / CLOCKS_PER_SEC;
-
-	std::clock_t	startDeque = clock();
-	cpyDeque = this->mergeInsertSortDeque(cpyDeque);
-	std::clock_t	endDeque = clock();	
-	double elapsedsecondsDeque = static_cast<double>(endDeque - startDeque) / CLOCKS_PER_SEC;
-	std::cout << "\e[7;1;42m =============================== Vector ================================\e[0m" << std::endl;
-	for (size_t i = 0; i < cpyVect.size() ; i++)
-	{
-		std::cout << "[" << cpyVect[i] << "]";
-	}
-	std::cout << std::endl;
-
-	std::cout << "\e[45m Time to process a range of std::vector of "
-		<< this->containerVector.size() << " elments with std::vector: "
-		<< std::fixed << std::setprecision(5) << elapsedsecondsVect<< "\e[0m" << std::endl;
-
-	std::cout << "\e[7;1;42m =============================== Deque =====================================\e[0m" << std::endl;
-	for (size_t i = 0; i < cpyDeque.size() ; i++)
-	{
-		std::cout << "[" << cpyDeque[i] << "]";
-	}
-	std::cout << std::endl;
-	std::cout << "\e[45m Time to process a range of std::vector of "
-		<< this->containerVector.size() << " elments with std::deque: "
-		<< std::fixed << std::setprecision(5) << elapsedsecondsDeque << "\e[0m" << std::endl;
 }

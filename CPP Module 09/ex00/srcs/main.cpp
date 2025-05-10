@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:07:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 11:15:51 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/10 19:02:29 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,16 @@ int main(int argc, char **argv)
             else
             {
                 std::string date = line.substr(0, index - 1);
-                float value = atof(line.substr(index + 1).c_str());
-                float ExchangeRate = be.getExchangeRates(date, value);
-                if (ExchangeRate >= 0)
-                    std::cout << date << " =>" << value << " = " << ExchangeRate * value << std::endl; 
+                if (index + 1 == line.length() - 1)
+                    std::cout <<  "\e[31;21;1mFormat error: " << line << "\e[0m" << std::endl;
+                else
+                {
+                    float value = atof(line.substr(index + 1).c_str());
+                    float ExchangeRate = be.getExchangeRates(date, value);
+                    if (ExchangeRate >= 0)
+                        std::cout << date << " =>" << value << " = " << ExchangeRate * value << std::endl; 
+                }
+
             }
         }
         inputFile.close();

@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 10:41:05 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 10:45:00 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:15:20 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	insertElements(Container& mainChain, Container& pend,
 
 template <typename Container,
 		 typename OutputCOntainer>
-OutputCOntainer	createPair(Container& container);
+OutputCOntainer	createMainPend(Container& container, Container& Main,
+		Container& pend);
 
 # include "utils.tpp"
 

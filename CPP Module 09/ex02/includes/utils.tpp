@@ -15,7 +15,8 @@ void	insertElements(Container& mainChain, Container& pend,
 
 template <typename Container,
 		 typename OutputContainer>
-OutputContainer	createPair(Container& container)
+OutputContainer	createMainPend(Container& container, Container& main,
+				Container& pend)
 {
 	OutputContainer	pairC;
 	size_t	len = container.size();
@@ -31,6 +32,8 @@ OutputContainer	createPair(Container& container)
 			std::swap(a, b);
 		std::pair<int, int>	pairInt(a, b);
 		pairC.push_back(pairInt);
+		main.push_back(b);
+		pend.push_back(a);
 	}
 	return (pairC);
 }

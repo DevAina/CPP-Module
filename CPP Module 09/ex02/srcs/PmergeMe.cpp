@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 13:44:53 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:28:23 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,22 @@ std::vector<int>	PmergeMe::mergeInsertSortVect(std::vector<int>& container)
 	if (lenContainer == 1)
 		return (container);
 
-	std::vector<std::pair<int, int> >	pairVect = createPair<std::vector<int>, std::vector<std::pair<int, int> > >(container);
+	std::vector<int>	pend;
+	std::vector<int>	mainChain;
+	std::vector<std::pair<int, int> >	pairVect = createMainPend<std::vector<int>, std::vector<std::pair<int, int> > >(container, mainChain, pend);
 	int	rest = -1;
 	if (lenContainer % 2 != 0)
 		rest = container[lenContainer - 1];
-	std::vector<int>	mainChain;
-	std::vector<int>	pend;
 	size_t	len = pairVect.size();
-
-	for (size_t i = 0; i < len; i++)
-	{
-		mainChain.push_back(pairVect[i].second);
-		if (pairVect[i].first > 0)
-			pend.push_back(pairVect[i].first);
-	}
 
 	mainChain = mergeInsertSortVect(mainChain);
 
 	for (size_t i = 0; i < len ; i++)
 	{
 		std::vector<int>::iterator	posinMain = std::find(mainChain.begin(), mainChain.end(), pairVect[i].second);
-		std::vector<int>::iterator	posPairPend = std::find(pend.begin(), pend.end(), pairVect[i].first);
 
 		size_t	indexMain = std::distance(mainChain.begin(), posinMain);
-		size_t	indexPend = std::distance(pend.begin(), posPairPend);
-		if (indexMain != indexPend)
-			std::swap(pend[indexMain], pend[indexPend]);
+		pend[indexMain] = pairVect[i].first;
 	}
 
 	mainChain.insert(mainChain.begin(), pend[0]);
@@ -92,35 +82,21 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 	if (lenContainer == 1)
 		return (container);
 
-	std::deque<std::pair<int, int> >	pairVect = createPair<std::deque<int>, std::deque<std::pair<int, int> > >(container);
+	std::deque<int>	pend;
+	std::deque<int>	mainChain;
+	std::deque<std::pair<int, int> >	pairVect = createMainPend<std::deque<int>, std::deque<std::pair<int, int> > >(container, mainChain, pend);
 	int	rest = -1;
 	if (lenContainer % 2 != 0)
 		rest = container[lenContainer - 1];
-	std::deque<int>	mainChain;
-	std::deque<int>	pend;
 	size_t	len = pairVect.size();
 
-	for (size_t i = 0; i < len; i++)
-	{
-		mainChain.push_back(pairVect[i].second);
-		if (pairVect[i].first > 0)
-			pend.push_back(pairVect[i].first);
-	}
-
-	mainChain = mergeInsertSortDeque(mainChain);
 
 	for (size_t i = 0; i < len ; i++)
 	{
 		std::deque<int>::iterator	posinMain = std::find(mainChain.begin(), mainChain.end(), pairVect[i].second);
-		std::deque<int>::iterator	posPairPend = std::find(pend.begin(), pend.end(), pairVect[i].first);
 
 		size_t	indexMain = std::distance(mainChain.begin(), posinMain);
-		size_t	indexPend = std::distance(pend.begin(), posPairPend);
-		if (indexMain != indexPend)
-		{
-			std::swap(pend[indexMain], pend[indexPend]);
-		}
-
+		pend[indexMain] = pairVect[i].first;
 	}
 
 	mainChain.insert(mainChain.begin(), pend[0]);

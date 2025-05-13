@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:21:14 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 11:08:10 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/13 08:50:49 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     }
     catch ( ... )
     {
-        std::cerr << "\e[1;21;31mError\e[0m";
+        std::cerr << "\e[1;21;31mError\e[0m" << std::endl;
     }
     return (0);
 }

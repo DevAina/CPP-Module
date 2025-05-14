@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:21:44 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 11:07:56 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:49:15 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <cstdlib>
+#include <string>
 
 static std::list<std::string>::iterator  getOperator(std::list<std::string>& input)
 {
@@ -87,7 +88,8 @@ RPN::RPN(const char *arg)
             currentNumber += arg[i];
         else
         {
-            if (!currentNumber.empty())
+            if (!currentNumber.empty() && (arg[i] == '-' || arg[i] == '+' || arg[i] == '/'
+                    || arg[i] == '*') && arg[i - 1] == ' ')
             {
                 if (currentNumber.size() > 1 ||
                         (atoi(currentNumber.c_str()) > 9 || atoi(currentNumber.c_str()) < 0))
@@ -106,6 +108,8 @@ RPN::RPN(const char *arg)
         input.push_back(currentNumber);
         currentNumber.clear();
     }
+    if (this->input.size() == 1)
+        throw std::invalid_argument("\e[1;21;31mInvalid argument\e[0m");
 }
 
 RPN::~RPN()

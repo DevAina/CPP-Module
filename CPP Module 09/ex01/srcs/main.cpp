@@ -6,12 +6,13 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:21:14 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/13 08:50:49 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/13 08:56:02 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RPN.hpp"
 #include <iostream>
+#include <stdexcept>
 
 int main(int argc, char **argv)
 {
@@ -28,6 +29,10 @@ int main(int argc, char **argv)
         RPN rpn(argv[1]);
         result =rpn.ProcessCalcul();
         std::cout << result << std::endl;
+    }
+    catch (const std::invalid_argument& err)
+    {
+        std::cerr << err.what() << std::endl;
     }
     catch (const std::runtime_error& err)
     {

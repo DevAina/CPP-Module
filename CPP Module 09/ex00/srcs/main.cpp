@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
+/*   By: trarijam <trarijam@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 11:07:37 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/10 19:02:29 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:36:22 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
         if (argc == 1 || argc > 2)
         {
-            std::cerr << "Error: could not open file." << std::endl;
+            std::cout << "Error: could not open file." << std::endl;
             return (1);
         }
         inputFile.open(argv[1]);
@@ -44,16 +44,11 @@ int main(int argc, char **argv)
             else
             {
                 std::string date = line.substr(0, index - 1);
-                if (index + 1 == line.length() - 1)
-                    std::cout <<  "\e[31;21;1mFormat error: " << line << "\e[0m" << std::endl;
-                else
-                {
-                    float value = atof(line.substr(index + 1).c_str());
-                    float ExchangeRate = be.getExchangeRates(date, value);
-                    if (ExchangeRate >= 0)
-                        std::cout << date << " =>" << value << " = " << ExchangeRate * value << std::endl; 
-                }
-
+                std::string valueString = line.substr(index + 1).c_str();
+                double value = atof(valueString.c_str());
+                float ExchangeRate = be.getExchangeRates(date, valueString);
+                if (ExchangeRate >= 0)
+                    std::cout << date << " => " << value << " = " << ExchangeRate * value << std::endl;
             }
         }
         inputFile.close();
@@ -64,7 +59,7 @@ int main(int argc, char **argv)
     }
     catch ( ... )
     {
-        std::cerr << "Error" << std::endl;
+        std::cout << "Error" << std::endl;
     }
     return (0);
 }

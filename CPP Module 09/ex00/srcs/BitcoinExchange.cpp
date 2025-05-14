@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 09:49:01 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 11:18:53 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:42:37 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <iterator>
 #include <ostream>
 #include <stdexcept>
 #include <string>
@@ -52,9 +53,9 @@ BitcoinExchange::BitcoinExchange()
             std::string date = line.substr(0, index);
             if (dateIsValid(date))
             {
-                float   value = atof(line.substr(index + 1).c_str());
-                if (valueIsValid(value))
-                    container.insert(std::make_pair(date, value));
+                std::string value = line.substr(index + 1).c_str();
+                if (atof(value.c_str()) >= 0)
+                    container.insert(std::make_pair(date, atof(value.c_str())));
             }
         }
     }
@@ -102,7 +103,7 @@ bool    BitcoinExchange::dateIsValid(const std::string& date) const
     int day = atoi(dayString.c_str());
 
     /********CHeck year**************/
-    if (year < 0 || (year < 1800 || year >= 2025))
+    if (year < 0)
         return (false);
     /***************Check month*********************/
     if (month < 1 || month > 12)
@@ -122,27 +123,53 @@ bool    BitcoinExchange::dateIsValid(const std::string& date) const
     }
     if (month == 2)
     {
-        if ((month % 4 != 0 && month % 100 != 0) || (month % 4 == 0 && month && 100 == 0 && month % 400 == 0))
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 4 == 0 && year && 100 == 0 && year % 400 == 0))
         {
             if (day < 1 || day > 29)
                 return (false);
-        };
+        }
+        else
+        {
+            if (day < 1 || day > 28)
+                return (false);
+        }
     }
     return (true);
 }
 
-bool    BitcoinExchange::valueIsValid(const float& value) const
+bool    BitcoinExchange::valueIsValid(const std::string& value) const
 {
-   if (value < 0 || value > 1000)
-       return (false);
-   return (true);
+    if (value.empty())
+        return (false);
+    std::string::const_iterator   it = value.cbegin();
+    it++;
+    if (it == value.end())
+        return (false);
+    for ( ; isdigit(*it); it++)
+    {
+    }
+    if (*it != '.' && it != value.end())
+        return (false);
+    if (it == value.end())
+        return (true);
+    it++;
+    if (!isdigit(*it))
+        return (false);
+    for (; isdigit(*it); it++)
+    {
+    }
+    if (it != value.end())
+        return (false);
+    return (true);
 }
 
-float   BitcoinExchange::getExchangeRates(const std::string& date, const float& value) const
+float   BitcoinExchange::getExchangeRates(const std::string& date, const std::string& value) const
 {
     float   ExchangeRates;
     std::map<std::string, float>::const_iterator itlow;
 
+    if (this->container.size() == 0)
+        return (0);
     if (!dateIsValid(date))
     {
         std::cout << "\e[31;21;1mBad input: => " << date << "\e[0m"<<std::endl;
@@ -150,7 +177,12 @@ float   BitcoinExchange::getExchangeRates(const std::string& date, const float& 
     }
     if (!valueIsValid(value))
     {
-        std::cout << "Error: not a positif number or not in the range [0 - 1000]" << "\e[0m" << std::endl;
+        std::cout << "Error: Argument not valid: " << value << ".\e[0m" << std::endl;
+        return (-1);
+    }
+    if (atof(value.c_str()) < 0 || atof(value.c_str()) > 1000)
+    {
+        std::cout << "Error: not a positif number or not in the range [0 - 1000]: " << value << ".\e[0m" << std::endl;
         return (-1);
     }
     itlow = container.lower_bound(date);

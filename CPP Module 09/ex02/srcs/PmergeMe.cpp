@@ -6,7 +6,7 @@
 /*   By: trarijam <trarijam@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:42:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/10 18:28:23 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:48:06 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ std::deque<int>	PmergeMe::mergeInsertSortDeque(std::deque<int>& container)
 		rest = container[lenContainer - 1];
 	size_t	len = pairVect.size();
 
-
+	mainChain = mergeInsertSortDeque(mainChain);
 	for (size_t i = 0; i < len ; i++)
 	{
 		std::deque<int>::iterator	posinMain = std::find(mainChain.begin(), mainChain.end(), pairVect[i].second);

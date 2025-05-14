@@ -1,8 +1,8 @@
-NAME =  BitcoinExchange
+NAME =  btc
 
 CXX = c++
 
-FLAGS = -Wall -Werror -Wextra -std=c++98
+FLAGS = -Wall -Werror -Wextra -std=c++11
 
 SRCS = ./srcs/main.cpp ./srcs/BitcoinExchange.cpp
 

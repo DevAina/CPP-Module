@@ -6,12 +6,11 @@
 /*   By: trarijam <trarijam@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 18:41:22 by trarijam          #+#    #+#             */
-/*   Updated: 2025/05/09 11:04:22 by trarijam         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:54:07 by trarijam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PmergeMe.hpp"
-#include <cstddef>
 #include <ctime>
 #include <iomanip>
 #include <iostream>
@@ -25,7 +24,7 @@ void	SortVector(int& argc, char **argv)
 	containerVect = PmergeMe::SortVector(containerVect);
 	std::clock_t	endVect = clock();
 	std::cout << "\e[21;1;33mSorting of positive integers using std::vector completed in: " << std::fixed
-		<< std::setprecision(5) << ((float)(endVect - startVect) / CLOCKS_PER_SEC) << "s.\e[0m" << std::endl;
+			<< std::setprecision(5) << ((float)(endVect - startVect) / CLOCKS_PER_SEC) << "s.\e[0m" << std::endl;
 }
 
 void	SortDeque(int& argc, char **argv)
@@ -35,14 +34,14 @@ void	SortDeque(int& argc, char **argv)
 	containerDeque = PmergeMe::SortDeque(containerDeque);
 	std::clock_t	endDeque = clock();
 	std::cout << "\e[21;1;32mSorting of positive integers using std::deque completed in: " << std::fixed
-		<< std::setprecision(5) << ((float)(endDeque - startDeque) / CLOCKS_PER_SEC) << "s.\e[0m" << std::endl;
+			<< std::setprecision(5) << ((float)(endDeque - startDeque) / CLOCKS_PER_SEC) << "s.\e[0m" << std::endl;
 }
 
 int	main(int argc, char **argv)
 {
 	if (argc <= 1)
 	{
-		std::cerr << "\e[31;1;21mError\e[0m" << std::endl;
+		std::cerr << "\e[31;1;21mError.\e[0m" << std::endl;
 		return (1);
 	}
 	try
